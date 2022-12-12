@@ -1,0 +1,143 @@
+.stepper{
+    background-size: 100%;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+.totto-logo { 
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.totto-logo img{ 
+    height: 50px;
+}
+
+/* //! ==== steopper ======== */
+.step-item {
+   font-family: 'Poppins', sans-serif;
+    position: relative; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+  }
+.step {
+    color: #8B77EE;
+    display: flex; 
+    position: relative; 
+    z-index: 10; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; 
+    justify-content: center; 
+    align-items: center; 
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 9999px; 
+    margin-right: 20px;
+    background: #F1F6FC;
+    border: 2px solid #8B77EE;
+
+}
+.active .step {
+  color: #8B77EE;
+    background: #F1F6FC;
+    border: 2px solid #8B77EE;
+}
+.complete .step {
+    background-color: #8B77EE;
+}
+.complete p {
+    color: #000;
+    align-items: center;
+    place-items: center;
+    font-size: 15px;
+}
+/* //! */
+.step-item:not(:last-child){
+  /* align-items: center; */
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 81.03%, #B5B8BC 81.04%, #B5B8BC 100%);
+}
+
+.complete:not(:last-child){
+  /* align-items: center; */
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 81.03%, #8B77EE 81.04%, #8B77EE 100%);
+}
+  /* //! */
+  .flex{
+    display: flex;
+    /* background-color: grey;  */
+}
+  .justify-between{
+    justify-content: space-between; 
+
+}
+  .text-gray-500{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-left: 8px;
+    /* text-align: center; */
+    color: #6B7280; 
+}
+  /* //! */
+/* .icon1{
+    color: white;
+} */
+.btn{ 
+   /* margin-left: 73%; */
+    margin-top: 20px;
+
+    background: #8B77EE;
+    border-radius: 11px;
+    border: none;
+    color: #fff;
+    padding: 13px 32px;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.maxwidth{
+ padding-bottom: 50px;
+  align-items: center ;
+  flex-direction: row;
+  display: flex;
+}
+.icon5{
+  width: 30px;
+  height: 30px;
+  color: #8B77EE;
+  cursor: pointer;
+}
+.icon6{
+  display: none;
+}
+.iconbuttton{
+  margin-right: auto;
+}
+
+/* //! ============== responcive ================  */
+@media screen and (max-width: 1050px ) {
+
+    
+}
+
+@media screen and (max-width: 650px ) {
+
+
+   
+}
+
+@media screen and (max-width: 490px ) {
+  .btn{ 
+    margin-right: 20px;
+     margin-top: 20px;
+     font-size: 15px;
+     border-radius: 7px;
+  } 
+}

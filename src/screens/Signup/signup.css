@@ -1,0 +1,143 @@
+.Login{
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+.totto-logo { 
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.totto-logo img{ 
+    height: 50px;
+}
+.SignUpContainer{
+    margin-bottom: 50px;
+
+    background: linear-gradient(179.97deg, #F7FAFB 82.82%, #D3E3FF 87.96%, #FFFFFF 88.05%);
+    box-shadow: 3px 15px 43px -5px rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    flex-direction: column;
+
+}
+.Login-Container-Text1 p{
+    font-family: 'Poppins', sans-serif;
+    margin: 20px;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 36px;
+    color: #000000;
+
+}
+.Login-Container-Text2 p{
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin-bottom: 5px;
+    margin-left: 80px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #8B77EE;
+    opacity: 0.6;
+}
+
+/* //!  ====== custom text field [1] =============== */  
+
+.custom-textfield{
+    margin-left: 40px;
+    margin-right: 40px;
+
+    align-items: center;
+    border: 3px solid #E6EEFC;
+    border-radius: 8px;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+.icon1{
+    color: #333333;
+    opacity: 0.7;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.icon2{
+    color: #8B77EE;
+    opacity: 0.7;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+input[type=text] {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    padding: 12px 30px 12px 5px;
+}
+
+ /* //! ========= button ===================  */
+.container-button {
+    padding-top: 40px;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    padding-bottom: 60px;
+}
+a{
+    text-decoration: none;
+}
+ .button {
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+    background: #8B77EE;
+    border-radius: 8px;
+    width: 80%;
+}
+
+ /* //! ============= login ===============  */
+.login-text{
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex; 
+}
+.login-session{
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 18px;
+    align-items: center;
+    flex: 1;
+    flex-direction: row;
+
+}
+
+/* //! ============== responcive ================  */
+@media screen and (max-width: 1050px ) {
+
+    
+ }
+ 
+ @media screen and (max-width: 650px ) {
+
+
+    
+}
+
+@media screen and (max-width: 490px ) {
+
+}

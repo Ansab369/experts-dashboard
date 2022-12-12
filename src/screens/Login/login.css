@@ -1,0 +1,35 @@
+.forgot-pass{
+    text-decoration: none;
+    padding-bottom: 50px;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+.forgot-pass a{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+
+}
+.container-login-button {
+    padding-top: 40px;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    padding-bottom: 10px;
+
+}
+.LoginContainer{
+    margin-bottom: 50px;
+    background: linear-gradient(179.98deg, #FFFFFF 0.02%, #F9FAFC 76.3%, #D3E3FF 85.6%, #FFFFFF 85.7%);
+    box-shadow: 3px 15px 43px -5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    flex-direction: column;
+}
+.login-session a{
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    color: #8B77EE;
+}

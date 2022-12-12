@@ -1,0 +1,292 @@
+.totto__navbar{
+    /* background-color: red; */
+    background-image: none;
+}
+.logo {
+    height: 60px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+  }
+  .urltext{
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    margin-left: -25px;
+    color: blueviolet;
+  }
+  .totto__navbar-menu{
+    display: none;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    margin-left: 1rem; 
+    position: relative;
+  }
+  .totto__navbar-menu_container{
+    /* width: 10px; */
+  
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    background-color: #DCD1F3;
+    text-align: end;
+    /* color: #8B77EE; */
+    padding: 2rem;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    margin-top: 1rem;
+    min-width: 210px;
+    border-radius: 5px;
+    box-shadow: 0 0 5 rgba(0,0,0,0.2);
+  }
+  .totto__navbar-links-container p,
+  .totto__navbar-links-container2 p{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: capitalize;
+  
+    margin: 1rem 0;
+    cursor: pointer;
+  }
+  .totto__navbar-menu_container-links{
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+  }
+  /* //!   */
+  .totto__navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 6rem;
+    
+  }
+  .totto__navbar-links{
+    flex:1;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .totto__navbar-links-logo{
+    margin-right: 2rem;
+  }
+  .totto__navbar-links-logo img{
+    width: 87.21px;
+    height: 53.92px;
+  }
+  .totto__navbar-links-container,
+  .totto__navbar-links-container2{
+      text-decoration: none;
+      /* flex:1; */
+      margin-right: 2rem;
+      /* justify-content: space-between; */
+      display: flex;
+      flex-direction: row;
+
+      /* background-color: red; */
+      
+  }
+  .totto__navbar-menu svg{
+    cursor: pointer;
+  }
+
+
+  .totto__navbar-menu_container-links a{
+    text-decoration: none;
+  }
+  .totto__navbar-menu_container-links p{
+    padding-top: 20px;
+  }
+  
+  
+  /* //! responcive */
+  @media screen and (max-width: 1050px){
+    .totto__navbar-links_container{
+        display: none;
+    }
+    .totto__navbar-menu{
+        display: flex;
+    }
+    .totto__navbar-links-container,
+    .totto__navbar-links-container2{
+        display: none;
+    } 
+  }
+  
+  @media screen and (max-width: 700px){
+    .totto__navbar{
+        padding: 2rem 4rem;
+    }
+     .totto__navbar-links-container,
+     .totto__navbar-links-container2{
+        display: none;
+    } 
+    .logOut-navBar{
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 550px){
+    .totto__navbar{
+        padding: 2rem;
+    }
+    .totto__navbar-menu_container{
+        top: 20px;
+    }
+    .totto__navbar-links-container,
+    .totto__navbar-links-container2{
+        display: none;
+    } 
+    .curve_background {
+        height: 50%;
+    }
+    .logOut-navBar{
+      display: none;
+    }
+  }
+
+  /* //! */
+  .totto__navbar-links-container a{
+    font-family: 'Poppins', sans-serif;
+    /* color: #000; */
+    color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 28px;
+    background-color: #8B77EE;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .totto__navbar-links-container2 a{
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 28px;
+    color: #000;
+    /* color: #126DD2; */
+    /* background-color:  #E6F2FE; */
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /* //! PopUp >>>> LogOuT */
+  .btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 998;
+}
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 15px;
+    max-width: 400px;
+    min-width: 300px;
+    z-index: 999;
+}
+.modal-content h2{
+   text-align: center;
+}
+.modal-content-p{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 20px;
+    opacity: 0.7;
+    color: #8B77EE;
+    padding: 5px 7px;
+    cursor: pointer;
+}
+.active-modal {
+  overflow-y: hidden;
+}
+.logOut-navBar{
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 28px;
+  color: #000;
+  background-color:  transparent;
+  border: 0px;
+  padding-right: 15px;
+  padding-left: 15px;
+  cursor: pointer;
+}
+.popup-buttons{
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.logOut-button{
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: 20px;
+  background-color: #8B77EE;
+  color: #fff;
+  border: 3px solid #8B77EE;
+  border-radius: 7px;
+}
+.Cancel-button{
+  cursor: pointer;
+  margin-left: auto;
+  color: #8B77EE;
+  border: 3px solid #8B77EE;
+  border-radius: 7px;
+}
+.modal-content p{
+  text-align: center;
+}
+.Cancel-button p,
+.logOut-button p{
+  text-align: center;
+   margin-top: 8px;
+   margin-bottom: 8px;  
+   margin-right: 20px;
+   margin-left: 20px;
+}
+.link-text{
+  color: #fff;
+
+}
+.logOut-navBar-menu{
+  
+}

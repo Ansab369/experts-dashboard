@@ -1,0 +1,100 @@
+.social-container{
+    margin-left: 20px;
+    margin-right: 20px;
+    align-items: center;
+    border: 4px solid #E6EEFC;
+    border-radius: 8px;
+    flex-direction: row;
+    margin-bottom: 20px;
+    background: #F1F6FC;
+    border: 2px solid #E6EEFC;
+    border-radius: 12px;
+}
+.textfieldSocial{
+    width: 100%;
+    margin-left: 20px;
+    background-color: #FFFFFF;
+    align-items: center;
+    border: 4px solid #E6EEFC;
+    border-radius: 8px;
+}
+.textfieldSocial input[type=text],
+.textfieldSocial2 input[type=text]{
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 5px;
+    font-family: 'Poppins', sans-serif;
+}
+   
+.textfieldtitle p{
+    margin-bottom: 0px;
+    margin-left: 20px;
+    font-weight: 100;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: #000000;
+}
+.socialRow{
+    flex-direction: row;
+    display: flex;
+}
+.sociallogo{
+    margin-left: 10px;
+    margin-right: 10px;
+    background: #FFFFFF;
+    border: 4px solid #E6EEFC;
+    border-radius: 8px;
+    align-items: center;
+    width: 115px;
+    height: 43px;
+    flex-direction: row;
+    display: flex;
+}
+.icon8{
+    margin: auto;
+    align-items: center;
+    color: black;
+    height: 30px;
+}
+.icon9{
+    margin: auto;
+    align-items: center;
+    color: #8B77EE;
+    opacity: 0.77;
+    height: 20px;
+}
+
+.textfieldSocial2{
+    width: 90%;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #FFFFFF;
+    align-items: center;
+    border: 4px solid #E6EEFC;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.socialbutton button{
+    
+    display: block;
+    margin-left: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.button2 {
+    border: none;
+    color: #000000;
+    opacity: 0.8;
+    padding: 13px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background: #F1F6FC;
+    border: 4px solid #E6EEFC;
+    border-radius: 10px;
+}
