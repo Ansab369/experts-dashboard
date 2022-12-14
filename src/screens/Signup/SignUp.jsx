@@ -26,7 +26,7 @@ function SignUp() {
             <div className="custom-textfield">
                 <FontAwesomeIcon className="icon1" icon= {faUser} />
                 <input type="text" id="lname" name="lname" placeholder="Username"></input>
-                <FontAwesomeIcon className="icon2" icon= {faCircleCheck} />
+                <FontAwesomeIcon className="icon28" icon= {faCircleCheck} />
             </div>
           {/* //! email */}
             <div className="custom-textfield">
@@ -37,14 +37,14 @@ function SignUp() {
             <div className="custom-textfield">
                 <FontAwesomeIcon className="icon1" icon= {faKey} />
                 <input type="text" id="lname" name="lname" placeholder="Password"></input>
-                <FontAwesomeIcon className="icon2" icon= {faEyeSlash} />
+                <FontAwesomeIcon className="icon28" icon= {faEyeSlash} />
 
             </div>
              {/* //! password  repeate*/}
              <div className="custom-textfield">
                 <FontAwesomeIcon className="icon1" icon= {faKey} />
                 <input type="text" id="lname" name="lname" placeholder="Confrim password"></input>
-                <FontAwesomeIcon className="icon2" icon= {faEye} />
+                <FontAwesomeIcon className="icon28" icon= {faEye} />
 
             </div>
             {/* //!  button    */}     

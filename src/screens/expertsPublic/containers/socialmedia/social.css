@@ -1,0 +1,67 @@
+.social{
+    background-image:url('../../../../assets/expertsAssets/Totto-bg-1.png');
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    background-size: 5%;
+}
+.social  p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8B77EE;
+}
+.social-container-1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding-bottom: 30px;
+    /* background-color: red; */
+ }
+ .social-container-1 div{
+     padding: 15px;
+	 border-radius: 50%;
+     margin: 1rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background: #FFFFFF;
+     border: 1px solid rgba(0, 0, 0, 0.2);
+     cursor: pointer;
+ }
+ .social-container-1 div:hover{
+    background: #EAE3F8;
+
+ }
+
+ /* //! ============== responcive ================  */
+@media screen and (max-width: 1050px ) {
+ }
+ @media screen and (max-width: 650px ) {
+}
+@media screen and (max-width: 490px ) {
+    .social-container-1{
+        padding-bottom: 20px;
+     }
+     .social-container-1 div{
+        padding: 10px;
+    }
+    .social{
+        background-size: 10%;
+    }
+
+}
+@media screen and (max-width: 320px ) {
+    .social-container-1{
+        padding-bottom: 10px;
+     }
+     .social-container-1 div{
+        padding: 7px;
+    }
+    .social{
+        background-size: 10%;
+    }
+
+}

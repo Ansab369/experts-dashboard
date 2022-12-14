@@ -1,0 +1,199 @@
+
+.headerimage{
+    position: relative;
+    padding-top: 10px;
+}
+.section__padding1{
+    /* padding-top: 30px; */
+    background-image:url('../../../../assets/expertsAssets/Totto-bg-4.png');
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+    background-size: 10%;
+}
+
+.text-1{
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+}
+  
+.text-2{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+
+}
+.text-3{
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+
+}
+.connect{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+/* //!========= button====== */
+
+.connect-content-button {
+    position: absolute;
+    top: 55%;
+    left: 30%;
+}
+.connect-content-button button{
+        float: right;
+        display: block;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        font-size:18px;
+        font-family:Arial;
+        width:164px;
+        height:52px;
+        border-width:2px;
+        color:rgba(7, 7, 7, 1);
+        border-color:rgba(0, 0, 0, 1);
+        border-top-left-radius:42px;
+        border-top-right-radius:42px;
+        border-bottom-left-radius:42px;
+        border-bottom-right-radius:42px;
+        background-color:transparent;
+}
+.connect-content-button button:hover {
+    background: rgba(7, 7, 7, 1);
+    color: #fff;
+}
+
+@media screen and (max-width: 1050px ) {
+    .headerimage img{
+        width: 100%;
+    }
+    .text-1{
+        top: 25%;
+        left: 20%;
+    }
+    .text-2{
+        left: 20%;
+    }
+    .text-3{
+        left: 20%;
+        padding-right: 20px;
+    }
+    .connect-content-button {
+        top: 65%;
+        left: 20%;
+    }
+      
+
+}
+@media screen and (max-width: 710px ) {
+    .text-1{
+        top: 25%;
+        left: 20%;
+    }
+    .text-2{
+        left: 20%;
+    }
+    .text-3{
+        left: 20%;
+        padding-right: 20px;
+    }
+    .connect-content-button {
+        top: 65%;
+        left: 20%;
+    }
+      
+
+}
+@media screen and (max-width: 650px ) {  
+    .text-1{
+        top: 25%;
+        left: 20%;
+    }
+    .text-2{
+        left: 20%;
+    }
+    .text-3{
+        left: 20%;
+        padding-right: 20px;
+    }
+    .connect-content-button {
+        top: 65%;
+        left: 20%;
+    } 
+    .connect{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+}
+@media screen and (max-width: 490px ) {
+    .connect{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+    .text-1{
+        top: 15%;
+        font-weight: 400;
+        font-size: 15px;
+    }
+    .text-2{
+        top: 25%;
+        font-weight: 300;
+        font-size: 20px;
+    }
+    .text-3{
+        top: 43%;
+        font-size: 14px;
+    }
+    .connect-content-button button{
+        font-size:16px;
+    }
+    .section__padding1{
+        background-size: 17%;
+    }
+    .headerimage{
+        padding-top: 0px;
+    }
+}
+@media screen and (max-width: 320px ) {
+    .text-1{
+        top: 15%;
+        font-weight: 400;
+        font-size: 14px;
+    }
+    .text-2{
+        top: 25%;
+        font-weight: 300;
+        font-size: 18px;
+    }
+    .text-3{
+        top: 43%;
+        font-size: 10px;
+    }
+    .connect-content-button button{
+        font-size:16px;
+    }
+    .section__padding1{
+        background-size: 17%;
+    }
+    .headerimage{
+        padding-top: 0px;
+    }
+}

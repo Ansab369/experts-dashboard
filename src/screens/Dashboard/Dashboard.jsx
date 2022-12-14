@@ -35,7 +35,7 @@ function Dashboard() {
   //   document.body.classList.remove('active-modal')
   // }
   return (
-    <div>
+    <div className="bg-gradient">
       <DashBoardNavBoard/>
       {/* <div className="totto__navbar">
         <div className="totto__navbar-links">

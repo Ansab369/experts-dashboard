@@ -4,7 +4,7 @@ import React from "react";
 import SignUp from './screens/Signup/SignUp';
 import Login from './screens/Login/Login';
 import Stepper from './screens/Stepper/Stepper';
-import Profile from "./screens/Dashboard/profile/Profile";
+// import Profile from "./screens/Dashboard/profile/Profile";
 import Dashboard from './screens/Dashboard/Dashboard';
 import { BrowserRouter as Router, Routes,Route} from 'react-router-dom';
 
@@ -15,10 +15,15 @@ import FeaturedSession from './screens/Dashboard/editBio/components/FeaturedSess
 import FeaturedVideo from './screens/Dashboard/editBio/components/FeaturedVideo';
 
 
+//!  experts
+import Experts from './screens/expertsPublic/Experts'
+
+
 function App() {
   return (
     <Router>
     <div className="App">
+
               <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/dashboard" element={<Revenue />} />
@@ -29,13 +34,16 @@ function App() {
                     <Route path="/signup/stepper" element={<Stepper/>} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
-                    
-               </Routes >
+               <Route path="/experts" element={<Experts />} />
+
+               </Routes>
+               {/* <Experts/> */}
                 {/* <SignUp/> */}
                 {/* <Login/> */}
                 {/* <Stepper/> */}
                 {/* <Dashboard/> */}
-    </div></Router>
+    </div>
+    </Router>
   );
 }
 

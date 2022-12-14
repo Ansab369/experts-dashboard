@@ -40,7 +40,7 @@
     top: 40px;
     right: 0;
     margin-top: 1rem;
-    min-width: 210px;
+    min-width: 150px;
     border-radius: 5px;
     box-shadow: 0 0 5 rgba(0,0,0,0.2);
   }
@@ -96,7 +96,7 @@
   .totto__navbar-menu svg{
     cursor: pointer;
   }
-
+ 
 
   .totto__navbar-menu_container-links a{
     text-decoration: none;
@@ -118,6 +118,9 @@
     .totto__navbar-links-container2{
         display: none;
     } 
+    .logOut-navBar{
+      display: none;
+    }
   }
   
   @media screen and (max-width: 700px){
@@ -128,9 +131,7 @@
      .totto__navbar-links-container2{
         display: none;
     } 
-    .logOut-navBar{
-      display: none;
-    }
+   
   }
   
   @media screen and (max-width: 550px){
@@ -146,9 +147,6 @@
     } 
     .curve_background {
         height: 50%;
-    }
-    .logOut-navBar{
-      display: none;
     }
   }
 
@@ -288,5 +286,15 @@
 
 }
 .logOut-navBar-menu{
-  
+  color: #551A8B;
+  background-color: transparent;
+  margin-top: 15px;
+  border: none;
+}
+.bg-gradient{
+  background-image: url('../../assets/background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 }

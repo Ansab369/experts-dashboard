@@ -1,14 +1,23 @@
-.social-container{
+.social-container1{
     margin-left: 20px;
     margin-right: 20px;
+    padding-right: 20px;
     align-items: center;
-    border: 4px solid #E6EEFC;
-    border-radius: 8px;
     flex-direction: row;
     margin-bottom: 20px;
     background: #F1F6FC;
     border: 2px solid #E6EEFC;
     border-radius: 12px;
+}
+.textfieldSocial2{
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #FFFFFF;
+    align-items: center;
+    border: 4px solid #E6EEFC;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 .textfieldSocial{
     width: 100%;
@@ -34,7 +43,7 @@
     margin-left: 20px;
     font-weight: 100;
     font-family: 'Poppins', sans-serif;
-    font-size: 10px;
+    font-size: 15px;
     color: #000000;
 }
 .socialRow{
@@ -67,16 +76,7 @@
     height: 20px;
 }
 
-.textfieldSocial2{
-    width: 90%;
-    margin-left: 20px;
-    margin-right: 20px;
-    background-color: #FFFFFF;
-    align-items: center;
-    border: 4px solid #E6EEFC;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
+
 
 .socialbutton button{
     
@@ -97,4 +97,75 @@
     background: #F1F6FC;
     border: 4px solid #E6EEFC;
     border-radius: 10px;
+}
+/* //! */
+
+.Social{
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+.infotext1{
+    padding: 30px;
+    align-items: center;
+    flex: 1;
+    flex-direction: row;
+    display: flex;
+}
+.infotext1 p{
+    font-family: 'Poppins', sans-serif;
+    margin-left: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+.Container1{
+    padding-top: 20px;
+     width: 100%;
+     /* width: 445px; */
+     max-width: 445px;
+    /* height: 635px; */
+    box-shadow: 3px 15px 43px -5px rgba(0, 0, 0, 0.25);
+    background: #FDFEFD;
+    border-radius: 10px;
+    flex-direction: column;
+}
+.icon27{
+    color: #D87575;
+}
+::placeholder {
+    font-weight: normal;
+    font-size: 14px;
+    color: #000000;
+    opacity: 0.6;
+}
+.textfieldSocial2{
+    width: 100%;
+}
+
+/* //! ============== responcive ================  */
+@media screen and (max-width: 1050px ) {
+
+    
+}
+@media screen and (max-width: 650px ) {
+
+
+   
+}
+@media screen and (max-width: 490px ) {
+    .Container1{
+        /* width: 90%; */
+        border-radius: 8px;
+    }
+
+    .social-container{
+
+        margin-left: 10px;
+        padding-right: 10px;
+        flex-direction: row;
+        margin-bottom: 17px;
+        border-radius: 10px;
+
+    }
 }

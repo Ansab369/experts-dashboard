@@ -1,0 +1,155 @@
+.main{
+    background-image:url('../../../../assets/expertsAssets/Totto-bg-2.png');
+    background-repeat: no-repeat;
+    background-position: 100% 1%;
+    background-size: 5%;
+}
+/* //!  ===========  youtube videos ============= */
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+  
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+  
+  /* //!  swiper  */
+  .sessioncontent{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.sessioncontent h1{
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 55px;
+    line-height: 78px;
+    color: #000;
+}
+.sessioncontent p { 
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin-top: 1.5rem;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 38px;
+    color: #000000;
+    opacity: 0.6;
+}
+.maindiv2{
+    background-color:  #fff;
+}
+.featured-video{
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 60px;
+    margin-right: 70px;
+}
+.video-session{
+    /* height: 70%; */
+    width: 70%;
+}
+.gradient__text{
+    color: #000;
+}
+.heading{
+    padding-top: 20px;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.16em;
+    color:#000;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+/* //!  ===== responcive ======= */
+@media screen and (max-width: 1050px ) {
+    .featured-video{
+        flex-direction: column;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+  
+    .sessioncontent{
+        margin: 2rem;
+    }
+    .sessioncontent h1 {
+        font-weight: 600;
+        font-size: 50px;
+        line-height: 60px;
+    }
+    .sessioncontent p { 
+        font-weight: 300;
+        margin-top: 1rem;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .video-session{
+        width: 90%;
+    }
+    
+ }
+@media screen and (max-width: 650px ) {
+}
+@media screen and (max-width: 490px ) {
+
+    .main{
+        background-size: 10%;
+    }
+
+    .heading{
+        font-size: 15px;
+        letter-spacing: 0.16em;
+        opacity: 0.8;
+    }
+    .sessioncontent{
+        margin: 1rem;
+    }
+    .sessioncontent h1{
+        font-weight: 00;
+        font-size: 30px;
+        line-height: 50px;
+    }
+    .sessioncontent p{
+        margin-top: 0rem;
+        font-size: 16px;
+    }
+    .session-content-button{
+        padding-right: 10px;
+    }
+}
+@media screen and (max-width: 310px ) {
+
+    .heading{
+        font-size: 14px;
+    }
+    .sessioncontent{
+        margin: 1rem;
+    }
+    .sessioncontent h1{
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .sessioncontent p{
+        margin-top: 0rem;
+        font-size: 14px;
+    }
+    .session-content-button{
+        padding-right: 5px;
+    }
+}

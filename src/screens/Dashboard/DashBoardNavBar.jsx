@@ -10,15 +10,44 @@ function DashBoardNavBoard() {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [modal, setModal] = useState(false);
 
+  const toggleModalmenu = () => {
+    setToggleMenu(!toggleMenu);
+  };
+
   const toggleModal = () => {
     setModal(!modal);
   };
+  
   if(modal) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
   }
+
+  if(toggleMenu) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
+
+
+  // String [editBioClassName, seteditBioClassName] = useState("");
+  // if(location.pathname==='/editbio/basicinfo'){
+  //   seteditBioClassName = 'totto__navbar-links-container';
+  // }else if(location.pathname==='/editbio/links'){
+  //    seteditBioClassName = 'totto__navbar-links-container';
+  // }else if(location.pathname==='/editbio/session'){
+  //    seteditBioClassName = 'totto__navbar-links-container';
+  // }else if(location.pathname==='/editbio/video'){
+  //    seteditBioClassName = 'totto__navbar-links-container';
+  // }else{ seteditBioClassName = 'totto__navbar-links-container2';}
   
+  // const pathList = ['/editbio/basicinfo','/editbio/links' , '/editbio/session' , '/editbio/video'];
+  // for (let x of pathList) {
+  //   setPath += x ;
+  // }
+
+
   return (
     <div className="totto__navbar">
     <div className="totto__navbar-links">
@@ -28,7 +57,10 @@ function DashBoardNavBoard() {
     </div>
     <CustomLink to='/' className={location.pathname==='/'? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Profile</CustomLink>
     <CustomLink to='/dashboard' className={location.pathname==='/dashboard'? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Dashboard</CustomLink>
-    <CustomLink to='/editbio/basicinfo' className={location.pathname===('/editbio/basicinfo'||'/editbio/links'|| '/editbio/session' || '/editbio/video') ? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Edit bio</CustomLink>
+    {/* <CustomLink to='/editbio/basicinfo' className={location.pathname===('/editbio/basicinfo'||'/editbio/links'|| '/editbio/session' || '/editbio/video') ? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Edit bio</CustomLink> */}
+    <CustomLink to='/editbio/basicinfo' className={location.pathname==='/editbio/basicinfo'?'totto__navbar-links-container': location.pathname=== '/editbio/links'? 'totto__navbar-links-container':   location.pathname=== '/editbio/session'?  'totto__navbar-links-container':     location.pathname=== '/editbio/video'?  'totto__navbar-links-container': 'totto__navbar-links-container2'}>Edit bio</CustomLink>
+    
+    
     <button className="logOut-navBar"  onClick={toggleModal}>LogOut</button>
           {modal && (
           <LogOutPopUp toggleModal={toggleModal}/>
@@ -36,8 +68,8 @@ function DashBoardNavBoard() {
     <div className='totto__navbar-menu'>
       {
         toggleMenu
-          ? <FontAwesomeIcon className="icon2" icon={faXmark} onClick={() => setToggleMenu(false)} />
-          : <FontAwesomeIcon className="icon2" icon={faBars} onClick={() => setToggleMenu(true)} />
+          ? <FontAwesomeIcon className="icon2" icon={faXmark} onClick={() => toggleModalmenu(false)} />
+          : <FontAwesomeIcon className="icon2" icon={faBars} onClick={() => toggleModalmenu(true)} />
       }
       {
         toggleMenu && (
@@ -48,9 +80,6 @@ function DashBoardNavBoard() {
               <p><Link to='/editbio/basicinfo' >Edit bio</Link></p>
              
               <button className="logOut-navBar-menu"  onClick={toggleModal}>LogOut</button>
-                    {modal && (
-                    <LogOutPopUp toggleModal={toggleModal}/>
-                    )}
             </div>
           </div>
         )

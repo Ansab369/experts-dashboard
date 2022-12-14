@@ -1,0 +1,13 @@
+.curve_background {
+    background-size: 100%;
+    background-image: url('../../assets/expertsAssets/background1.png');
+    background-repeat: no-repeat;
+}
+.Experts {
+    /* background-image: url('../../assets/expertsAssets/bg.png'); */
+    text-align: center;
+  }
+.body{
+    background-image: 
+    none;
+}

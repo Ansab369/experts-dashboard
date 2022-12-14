@@ -29,7 +29,7 @@ function Login() {
                 <div className="custom-textfield">
                     <FontAwesomeIcon className="icon1" icon={faKey} />
                     <input type="text" id="lname" name="lname" placeholder="Password"></input>
-                    <FontAwesomeIcon className="icon2" icon={faEyeSlash} />
+                    <FontAwesomeIcon className="icon28" icon={faEyeSlash} />
 
                 </div>
                

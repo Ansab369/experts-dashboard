@@ -6,7 +6,7 @@ import DashBoardNavBoard from '../DashBoardNavBar';
 function Revenue() {
   const [startDate, setStartDate] = useState(new Date());
   return (
-   <>
+   <div className="bg-gradient-1" >
    <DashBoardNavBoard/>
     <div className="Revenue">
        <div className="Container" >
@@ -62,7 +62,7 @@ function Revenue() {
            <div  className="dashboard-batch">
                    <p className="dashboard-batch-p">Subscription Details</p>
                    <div className="table-head">
-                         <div className="tablehead1"></div>
+                         <div className="tablehead2"></div>
                          <p>Subscribers</p>  
                          <p className="total-batch-number">24</p>       
                    </div>
@@ -91,7 +91,7 @@ function Revenue() {
            <div  className="dashboard-batch">
                    <p className="dashboard-batch-p">Revenue</p>
                    <div className="table-head">
-                         <div className="tablehead1"></div>
+                         <div className="tablehead3"></div>
                          <p>Revenue</p>  
                          <p className="total-batch-number">8630.4</p>       
                    </div>
@@ -112,7 +112,7 @@ function Revenue() {
           </div>
         </div>
   </div>
-  </>
+  </div>
   );
 
 }

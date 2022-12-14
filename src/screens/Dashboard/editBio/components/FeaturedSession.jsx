@@ -1,5 +1,5 @@
 import React  from "react";
-// import './editBio.css';
+import './basic.css';
 // import { Link} from 'react-router-dom';
 import EditBioNavBar from '../EditBioNavBar'
 import Session from '../../../Stepper/Components/Session/Session';
