@@ -60,7 +60,7 @@ function Profile() {
         <div className="header-user-details-17">
           <h1>{userName}</h1>
             <div className="header-user-data">
-              { proffesion.map((e)=>{return <p>{e}</p>}) }
+              {proffesion??""?"": proffesion.map((e)=>{return <p>{e}</p>}) }
            </div>
           <p className><FontAwesomeIcon className="editIcon" icon= {faPenToSquare} />Edit Bio</p>
         </div>

@@ -16,13 +16,6 @@ function DashBoardNavBoard() {
   };
 
   const toggleModal = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
-
     setModal(!modal);
   };
   
@@ -96,6 +89,14 @@ function DashBoardNavBoard() {
   </div>
   );
 }
+
+const LogOutFunction = () => {
+  const auth = getAuth();
+signOut(auth).then(() => {
+}).catch((error) => {
+});
+
+};
 function CustomLink({ to, children, className, ...props }) {
     return <div className={className}>
       <p>  <Link to={to} >{children}</Link>  </p>
@@ -109,7 +110,7 @@ function LogOutPopUp({toggleModal, ...props }) {
       <p className="modal-content-p">Are you sure want to log out?</p>
       <div className="popup-buttons">
         <div className="Cancel-button" onClick={toggleModal}><p>Cancel</p></div>
-        <div className="logOut-button"><Link to='/login' className="link-text"><p>Log Out</p></Link></div>
+        <div className="logOut-button" onClick={LogOutFunction}><p>Log Out</p></div>
       </div>
       <FontAwesomeIcon className="close-modal" icon={faXmark} onClick={toggleModal}/>
     </div>

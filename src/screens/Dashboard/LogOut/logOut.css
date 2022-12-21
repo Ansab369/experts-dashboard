@@ -1,4 +1,4 @@
-.forgot-pass{
+/* .forgot-pass{
     text-decoration: none;
     padding-bottom: 50px;
     align-items: center;
@@ -34,7 +34,6 @@
     color: #8B77EE;
 }
 
-/* //! Login CSS  >>> */
 
 
 .Login{
@@ -85,7 +84,6 @@
     opacity: 0.6;
 }
 
-/* //!  ====== custom text field [1] =============== */  
 
 .custom-textfield{
     margin-left: 40px;
@@ -120,7 +118,6 @@ input[type=text] {
     padding: 12px 30px 12px 5px;
 }
 
- /* //! ========= button ===================  */
 .container-button {
     padding-top: 40px;
     align-items: center;
@@ -145,7 +142,6 @@ input[type=text] {
     width: 80%;
 }
 
- /* //! ============= login ===============  */
 .login-text{
     align-items: center;
     flex: 1;
@@ -163,7 +159,6 @@ input[type=text] {
 
 }
 
-/* //! ============== responcive ================  */
 @media screen and (max-width: 1050px ) {
 
     
@@ -177,4 +172,4 @@ input[type=text] {
 
 @media screen and (max-width: 490px ) {
 
-}
+} */
