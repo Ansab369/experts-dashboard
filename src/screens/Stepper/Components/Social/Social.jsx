@@ -1,115 +1,68 @@
-import React  from "react";
+import React from "react";
 import "react-widgets/styles.css";
 import './social.css';
-import DropdownList from "react-widgets/DropdownList";
+// import DropdownList from "react-widgets/DropdownList";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 
-function Social() {
+function Social({ updateField, formData }) {
 
-    
+
   return (
     <div className="ComponentA">
-    <div className="infotext">
-        <FontAwesomeIcon className="icon7" icon= {faCircleInfo} />
+      <div className="infotext">
+        <FontAwesomeIcon className="icon7" icon={faCircleInfo} />
         <p>Add your Social Media Links</p>
-    </div>
-    <div className="Container" >
-    {/* //! */}
-
-
-
-
-
-    <div  className="social-container">
-       
-       <div>
-          
-           {/* //!  { 1 } */}
-           <div className="textfieldtitle">
-               <p>Title</p>
-           </div>
-           <div className="textfieldSocial2">
-                      <DropdownList className="dropdowm"
-                                defaultValue="Instagram"
-                                data={["Instagram", "Facebook", "Twitter", "Whatsapp"]}/>
-                  {/* <input type="text" id="lname" name="lname"placeholder="Featured Session Title" ></input> */}
-              </div>
-              {/* //!  { 2 } */}
-              {/* <div className="textfieldtitle">
-                  <p>Media</p>
-              </div>
-               <div className="image-button1">
-                   <button className="button5">Select Image</button>
-              </div> */}
-                {/* //!  about */}
-                  <div className="textfieldtitle">
-                  <p>Link</p>
-                  </div>
-                  
-                    <div className="textfieldSocial2">
-                    <textarea rows = "1" cols = "45" name = "description" placeholder="Social Media Link">
-                     
-                  </textarea>
-                    </div>
-
-
-
-           {/* //!  { 4 } */}
-
-              {/* <div className="textfieldtitle">
-               <p>Link</p>
-           </div>
-           <div className="textfieldSocial2">
-                  <input type="text" id="lname" name="lname"placeholder="Featured Session Link" ></input>
-              </div> */}
-             
+      </div>
+      <div className="Container" >
+        {/* //! */}
+        <div className="social-container">
+          <div>
+            {/* //!  1 */}
+            <div className="textfieldtitle">
+              <p>FaceBook</p>
+            </div>
+            <div className="textfieldSocial2">
+              <textarea rows="1" cols="45" name="description" placeholder="Facebook Profile Link" value={formData['socialMediaFacebook']} onChange={(e) => updateField('socialMediaFacebook', e.target.value)}>
+              </textarea>
+            </div>
+            {/* //! 2  */}
+            <div className="textfieldtitle">
+              <p>Instagram</p>
+            </div>
+            <div className="textfieldSocial2">
+              <textarea rows="1" cols="45" name="description" placeholder="Instagram Profile Link" value={formData['socialMediaInstagram']} onChange={(e) => updateField('socialMediaInstagram', e.target.value)}>
+              </textarea>
+            </div>
+            {/* //! 3*/}
+            <div className="textfieldtitle">
+              <p>Youtube</p>
+            </div>
+            <div className="textfieldSocial2">
+              <textarea rows="1" cols="45" name="description" placeholder="Youtube Link" value={formData['socialMediaYoutube']} onChange={(e) => updateField('socialMediaYoutube', e.target.value)}>
+              </textarea>
+            </div>
+            {/* //! 4 */}
+            <div className="textfieldtitle">
+              <p>Twitter</p>
+            </div>
+            <div className="textfieldSocial2">
+              <textarea rows="1" cols="45" name="description" placeholder="Twitter Profile Link" value={formData['socialMediaTwitter']} onChange={(e) => updateField('socialMediaTwitter', e.target.value)}>
+              </textarea>
+            </div>
+            {/* //! 5 */}
+            <div className="textfieldtitle">
+              <p>LinkedIn</p>
+            </div>
+            <div className="textfieldSocial2">
+              <textarea rows="1" cols="45" name="description" placeholder="LinkedIn Profile Link" value={formData['socialMediaLinkedIn']} onChange={(e) => updateField('socialMediaLinkedIn', e.target.value)}>
+              </textarea>
+            </div>
+          </div>
         </div>
-        
-   </div>
-   {/* //!  add more button */}
-   <div className="socialbutton">
-        <button className="button2">Add More</button>
-        </div>
-       
-  
-
+      </div>
     </div>
-</div>
-    // <div className="Social">
-    //     <div className="infotext1">
-    //         <FontAwesomeIcon className="icon27" icon= {faCircleInfo} />
-    //!         <p>Add your Social Media Links</p>
-    //     </div>
-    //     <div className="Container1" >
-    //         <div  className="social-container1">
-    //             <div>
-    //                 <div className="textfieldtitle">
-    //  !                   <p>Media</p>
-    //                 </div>
-    // !                <div className="textfieldSocial2">
-    //                      <DropdownList className="dropdowm"
-    //                             defaultValue="Instagram"
-    //                             data={["Instagram", "Facebook", "Twitter", "Whatsapp"]}/>
-    //                 </div>
-    //                 <div className="textfieldtitle">
-    //                     <p>Link</p>
-    //                 </div>
-    //                 <div className="textfieldSocial2">
-    //                        <input type="text" id="lname" name="lname"placeholder="Profile link" ></input>
-    //                    </div>
-    //              </div>
-    //         </div>
-    //         {/* //!  2   */}
-
-    //    {/* //!  add more button */}
-    //         <div className="socialbutton">
-    //         <button className="button2">Add More</button>
-    //         </div>
-
-    //     </div>
-    // </div>
   );
 }
 

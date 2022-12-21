@@ -45,8 +45,6 @@
     justify-content: left;
     align-items: flex-start;
     flex-direction: column;
-
-
 }
 .header-user-details-17 h1{
     padding: 0;
@@ -174,14 +172,14 @@
     .header-user-details-1 p{
         text-align: center;
     } */
- }
+}
  
  @media screen and (max-width: 650px ) {
     .section__padding{
         padding: 2rem 2rem;
       }
 
-    .header-user-details-1 h1{
+    .header-user-details-17 h1{
         font-size: 32px;
         line-height: 80px;
     }
@@ -190,7 +188,7 @@
         line-height: 15px;
         padding-right: 15px;
     }
-    .header-user-details-1 p{
+    .header-user-details-17 p{
         font-size: 16px;
         line-height: 25px;   
         opacity: 0.8;
@@ -220,7 +218,6 @@
         font-size: 13px;
     }
     .btn{ 
-        margin-left: 10px;
         padding: 13px 22px;
         border-radius: 7px;
         font-size: 14px;
@@ -236,12 +233,12 @@
     .section__padding{
         padding: 1rem 0.5rem;
       }
-      .header-user-details-1{
+      .header-user-details-17{
         /* padding-left: 30px; */
         padding-right: auto;
       }
 
-    .header-user-details-1 h1{
+    .header-user-details-17 h1{
         font-size: 34px;
         line-height: 44px;
         text-align: center;
@@ -252,7 +249,7 @@
         padding-right: 10px;
         text-align: center;
     }
-    .header-user-details-1 p{
+    .header-user-details-17 p{
         font-size: 16px;
         line-height: 25px;   
         opacity: 0.8;
@@ -299,14 +296,13 @@
     line-height: 26px;
     color: #FCFDFE;
     opacity: 0.8;
+    margin-bottom: 10px;
     }
     .btn{ 
-     background: #8B77EE;
-     border: none;
-     color: #fff;
+        /* width: 100%; */
+
+
      padding: 13px 32px;
-     text-decoration: none;
-     display: inline-block;
      font-size: 15px;
      border-radius: 7px;
      margin-top: 0px;
@@ -318,12 +314,16 @@
         padding-bottom: 10px;
         justify-content: center;
     }
+    .copyIcon{
+        color: #fff;
+        margin-left: 10px;
+    }
 }
 
 
 @media screen and (max-width: 360px ) {
 
-    .header-user-details-1 h1{
+    .header-user-details-17 h1{
         font-size: 28px;
         line-height: 40px;
     }
@@ -332,7 +332,7 @@
         line-height: 14px;
         padding-right: 7px; 
     } 
-    .header-user-details-1 p{
+    .header-user-details-17 p{
         font-size: 14px;
         line-height: 23px;   
         opacity: 0.8;
@@ -361,4 +361,9 @@
      border-radius: 5px;
     }
 }
-
+.header-user-data p{
+    padding-left: 7px;
+    padding-right: 7px;
+    /* padding: 10px; */
+    cursor: default;
+}

@@ -4,6 +4,7 @@ import { Link, useLocation} from 'react-router-dom';
 import logo from '../../assets/Tottologo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { getAuth, signOut } from "firebase/auth";
 
 function DashBoardNavBoard() {
   const location = useLocation();
@@ -15,6 +16,13 @@ function DashBoardNavBoard() {
   };
 
   const toggleModal = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+
     setModal(!modal);
   };
   
