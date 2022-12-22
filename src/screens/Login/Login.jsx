@@ -38,8 +38,11 @@ function Login() {
                     setLoginError('Incorrect Password!');
                 } else if (loginError == 'auth/too-many-requests') {
                     setLoginError('Too many attempts try later!');
-                } else {
-                    setLoginError('Something Went Wrong!');
+                }  else if (loginError == 'auth/user-not-found') {
+                    setLoginError('Email and password is incorrect.!');
+                } 
+                else {
+                    setLoginError('');
                 }
             })
         } else { setLoginError('Enter email'); }

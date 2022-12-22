@@ -9,13 +9,17 @@ import { auth, db} from "../../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { getAuth ,onAuthStateChanged} from "firebase/auth";
 
+import HashLoader from "react-spinners/HashLoader";
+
 
 function Profile() {
-  const[userName,setUserName] = useState();
-  const[proffesion,setProffesion] = useState([]);
+  const[firstName,setFirstName] = useState();
+  const[lastName,setlastName] = useState();
+  // const[proffesion,setProffesion] = useState([]);
+  const[userEmail,setEmail] = useState([]);
   const[linkName,setLinkName] = useState();
-
-
+  const[userProfile,setUserProfile] = useState();
+  const[isLoading,setIsloading] = useState(true);
 
   useEffect(() => {    
     const user=auth.currentUser;
@@ -26,10 +30,13 @@ function Profile() {
         console.log(uid);
         fetchUserData(uid);
       } else {
-       
+        
       }
     });
   },[]);
+
+
+  
 
   let fetchUserData = async(uid) => {
       const auth = getAuth();
@@ -38,31 +45,55 @@ function Profile() {
       const docSnap = await getDoc(docRef);
       const data = docSnap.data(); 
       if (docSnap.exists()) {
-        setUserName(data.username);
-        setProffesion(data.expertsIn)
-        setLinkName(data.linkName)
-        // console.log("data is = :",data.expertsIn);
+        setFirstName(data.firstName);
+        setlastName(data.lastName);
+        // setProffesion(data.expertsIn)
+        setLinkName(data.linkName);
+        setEmail(data.email);
+        setUserProfile(data.userImageUrl);
+        setIsloading(false);
+
+        
+        console.log("data is = :",data.firstName);
       } else {
         console.log("No such document!");
       }
   }
 
-
+  if(isLoading===true){
+    return (
+      <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        width: "100%"
+      }}
+      >
+      <HashLoader color="#36d7b7" />
+      </div>
+    );
+  }
   return (
     <div className="profile">
          <div className="header section__padding">
           <div className="header-photo-section">
               <div className="header-image">
-                <img src= {userimage} alt='user'/>
+                <img src={userProfile} alt='user'/>
               </div>
           </div>
       <div className="header-user11">
         <div className="header-user-details-17">
-          <h1>{userName}</h1>
+          <h1>{firstName +" "+lastName}</h1>
             <div className="header-user-data">
-              {proffesion??""?"": proffesion.map((e)=>{return <p>{e}</p>}) }
+              {/* {proffesion.map((e)=>{return <p>{e}</p>}) } */}
+              <p>{userEmail}</p>
            </div>
-          <p className><FontAwesomeIcon className="editIcon" icon= {faPenToSquare} />Edit Bio</p>
+           <Link to='/editbio/basicinfo'>  <p className><FontAwesomeIcon className="editIcon" icon= {faPenToSquare} />Edit Bio</p></Link>
         </div>
       </div>
     </div>
@@ -71,9 +102,9 @@ function Profile() {
         <div className="preview-2">
           <p className="preview-p1">tottolearning.com/experts/{linkName}<FontAwesomeIcon className="copyIcon" icon= {faCopy} /></p>
           <div className="copy-preview">
-            <button className="btn">
-              <Link to='/experts'> Preview</Link>
-            </button>
+            <Link to='/experts'><button className="btn">
+               Preview
+            </button></Link>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './signup.css';
 import logo from '../../assets/Tottologo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCircleCheck, faEnvelope, faKey, faEyeSlash, faEye , faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCircleCheck, faEnvelope, faKey, faEyeSlash, faEye, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, sendEmailVerification, getAuth } from "firebase/auth";
 import { auth, db } from "../../firebase";
@@ -30,74 +30,78 @@ function SignUp() {
 
 
   let sentUsernsme = async (user) => {
-        try {
-          const docRef = doc(db, 'users', user.uid);
-          setDoc(docRef, {
-            linkName: linkName,
-            email: email,
-            uid: user.uid
-          }, { merge: true });
-          console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-          console.error("Error adding document: ", e);
+    try {
+      const docRef = doc(db, 'users', user.uid);
+      setDoc(docRef, {
+        linkName: linkName,
+        email: email,
+        uid: user.uid
+      }, { merge: true });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
-}
+  }
   const signUpfunction = async () => {
     const regex = /[^a-zA-Z]/g;
-      if (!regex.test(linkName)) {
-    const usersRef = collection(db, 'users');
-    const q = query(usersRef, where('linkName', '==', linkName));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.size > 0) {
-      setSignUpError('This username is already in use.');
-      setUsernameIcon(false);
+    if (!regex.test(linkName)) {
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where('linkName', '==', linkName));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.size > 0) {
+        setSignUpError('This username is already in use.');
+        setUsernameIcon(false);
+      } else {
+        setUsernameIcon(true);
+        conformPassword === password ?
+          createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            sendEmailVerification(auth.currentUser)
+              .then(() => {
+              });
+            const user = userCredential.user;
+            setUser(user);
+            sentUsernsme(user);
+            navigate("/signup/stepper");
+          }).catch((error) => {
+            const errorCode = error.code;
+            console.log(error.message);
+            console.log(errorCode);
+            if (errorCode == 'auth/internal-error') {
+              setSignUpError('Enter email and password !');
+            } else if (errorCode == 'auth/invalid-email') {
+              setSignUpError('Enter email !');
+            } else if(errorCode == 'auth/weak-password') {
+              setSignUpError('Password has to be min. 8 chars.');
+            }else if (errorCode == 'auth/email-already-in-use') {
+              setSignUpError('Email alredy in use.');
+            }
+          }) : setSignUpError('Password not matching.');
+      }
     } else {
-      setUsernameIcon(true);
-      conformPassword===password?
-      createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        sendEmailVerification(auth.currentUser)
-          .then(() => {
-          });
-        const user = userCredential.user;
-        setUser(user);
-        sentUsernsme(user);
-        navigate("/signup/stepper");
-      }).catch((error) => {
-        const errorCode = error.code;
-        console.log(errorCode);
-        if (errorCode == 'auth/internal-error') {
-          setSignUpError('Enter email and password !');
-        }if (errorCode == 'auth/invalid-email') {
-          setSignUpError('Enter email !');
-        }if (errorCode == 'auth/weak-password') {
-          setSignUpError('Password has to be min. 8 chars.');
-        }
-      }): setSignUpError('Password not matching.');
-    }} else{
       setSignUpError('Username must be letters');
       setUsernameIcon(false);
     }
-}
+  }
   const PasswordHide1 = () => {
     if (eyeIcon1 === faEyeSlash) {
       setEyeIcon1(faEye);
-        setshow_input1(false);
+      setshow_input1(false);
 
     } else {
       setEyeIcon1(faEyeSlash);
-        setshow_input1(true);
+      setshow_input1(true);
     }
-}
+  }
   const PasswordHide2 = () => {
     if (eyeIcon2 === faEyeSlash) {
-        setEyeIcon2(faEye);
-        setshow_input2(false);
+      setEyeIcon2(faEye);
+      setshow_input2(false);
 
     } else {
-        setEyeIcon2(faEyeSlash);
-        setshow_input2(true);
+      setEyeIcon2(faEyeSlash);
+      setshow_input2(true);
     }
-}
+  }
 
   return (
     <div className="Login">
@@ -115,7 +119,7 @@ function SignUp() {
         <div className="custom-textfield">
           <FontAwesomeIcon className="icon1" icon={faUser} />
           <input type="text" id="lname" name="lname" placeholder="Username" onChange={(e) => setLinkName(e.target.value)}></input>
-          <FontAwesomeIcon className={usernameIcon===false?"icon28 icon38 icon73":"icon28 icon38"}    icon={usernameIcon===false?faCircleXmark:faCircleCheck} />
+          <FontAwesomeIcon className={usernameIcon === false ? "icon28 icon38 icon73" : "icon28 icon38"} icon={usernameIcon === false ? faCircleXmark : faCircleCheck} />
         </div>
         {/* // todo email */}
         <div className="custom-textfield">
@@ -130,10 +134,10 @@ function SignUp() {
         </div>
         {/* //! password  repeate onClick={PasswordHide2} */}
         <div className="custom-textfield">
-          <FontAwesomeIcon className="icon1"  icon={faKey} />
-          <input 
-          type={show_input2 ? 'text' : 'password'}
-          id="lpassword" name="lname" placeholder="Confrim password" onChange={(e) => setConformPassword(e.target.value)}></input>
+          <FontAwesomeIcon className="icon1" icon={faKey} />
+          <input
+            type={show_input2 ? 'text' : 'password'}
+            id="lpassword" name="lname" placeholder="Confrim password" onChange={(e) => setConformPassword(e.target.value)}></input>
           <FontAwesomeIcon className="icon28" onClick={PasswordHide2} icon={eyeIcon2} />
         </div>
         <div className="SignScreen-errorText">

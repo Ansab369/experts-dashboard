@@ -15,17 +15,25 @@ import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
 function Stepper() {
 
-  let sentUsernsme = async (user) => {
+  const [profileImage, setProfileImage] = useState(null);
+  const [userUrl, setUserUrl] = useState();
+  
+
+
+  let sentUsernsme = async (user, profilePicUrl) => {
     try {
       const docRef = doc(db, 'users', user.uid);
       setDoc(docRef, {
         //! bio
-        username: formData['userName'] ?? '',
+        firstName: formData['firstName'] ?? '',
+        lastName: formData['lastName'] ?? '',
+        userImageUrl: profilePicUrl,
         location: formData['location'] ?? '',
         organization: formData['organization'] ?? '',
         about: formData['about'] ?? '',
@@ -54,10 +62,16 @@ function Stepper() {
     }
   }
 
-  function sentDetailsToFirebase() {
+  async function sentDetailsToFirebase () {
     const auth = getAuth();
     const user = auth.currentUser;
-    sentUsernsme(user);
+    const storage = getStorage();
+    const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
+
+     let snapshot =await uploadBytes(storageRef, profileImage);
+     let url = await getDownloadURL(snapshot.ref) ;
+     setUserUrl(url);
+     sentUsernsme(user, url);
     currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
     return;
   }
@@ -65,7 +79,6 @@ function Stepper() {
   const steps = ["Bio", "Social", "Session", "Video"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
-
   const [formData, setFormData] = useState({});
 
   function updateField(field, value) {
@@ -100,7 +113,7 @@ function Stepper() {
           { }
           <div>
             {
-              currentStep === 1 ? <ComponentA formData={formData} updateField={updateField} /> :
+              currentStep === 1 ? <ComponentA formData={formData} updateField={updateField} setProfileImage={setProfileImage} /> :
                 currentStep === 2 ? <Social formData={formData} updateField={updateField} /> :
                   currentStep === 3 ? <Session formData={formData} updateField={updateField} /> :
                     currentStep === 4 ? <Video formData={formData} updateField={updateField} /> : null
@@ -113,10 +126,7 @@ function Stepper() {
             </span>
             <button
               className="btn"
-              // onChange={(e) =>setEmail(e.target.value)}
-              onClick={sentDetailsToFirebase}
-            // onClick={() => {currentStep === steps.length ? setComplete(true): setCurrentStep((prev) => prev + 1);}}
-            >
+              onClick={sentDetailsToFirebase}>
               {currentStep === steps.length ? "Finish" : "Next"}
             </button>
           </div>
@@ -133,8 +143,6 @@ function Stepper() {
           </div>
           <div className="maxwidth" >
             <span className="iconbuttton" onClick={() => { currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev - 1); }}>
-              {/* <FontAwesomeIcon className= {currentStep===1?"icon6":"icon5"} id="backarrow" icon={faArrowLeft} /> */}
-
             </span>
             <Link to='/login' >
               <button className="btn">

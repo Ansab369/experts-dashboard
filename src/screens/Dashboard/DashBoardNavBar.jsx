@@ -57,7 +57,7 @@ function DashBoardNavBoard() {
       </div>
     </div>
     <CustomLink to='/' className={location.pathname==='/'? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Profile</CustomLink>
-    <CustomLink to='/dashboard' className={location.pathname==='/dashboard'? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Dashboard</CustomLink>
+    {/* <CustomLink to='/dashboard' className={location.pathname==='/dashboard'? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Dashboard</CustomLink> */}
     {/* <CustomLink to='/editbio/basicinfo' className={location.pathname===('/editbio/basicinfo'||'/editbio/links'|| '/editbio/session' || '/editbio/video') ? 'totto__navbar-links-container':'totto__navbar-links-container2'}>Edit bio</CustomLink> */}
     <CustomLink to='/editbio/basicinfo' className={location.pathname==='/editbio/basicinfo'?'totto__navbar-links-container': location.pathname=== '/editbio/links'? 'totto__navbar-links-container':   location.pathname=== '/editbio/session'?  'totto__navbar-links-container':     location.pathname=== '/editbio/video'?  'totto__navbar-links-container': 'totto__navbar-links-container2'}>Edit bio</CustomLink>
     
@@ -77,7 +77,7 @@ function DashBoardNavBoard() {
           <div className='totto__navbar-menu_container scale-up-center'>
             <div className='totto__navbar-menu_container-links' >
               <p><Link to='/' >Profile</Link></p>
-              <p><Link to='/dashboard' >Dashboard</Link></p>
+              {/* <p><Link to='/dashboard' >Dashboard</Link></p> */}
               <p><Link to='/editbio/basicinfo' >Edit bio</Link></p>
              
               <button className="logOut-navBar-menu"  onClick={toggleModal}>LogOut</button>

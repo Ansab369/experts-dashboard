@@ -8,40 +8,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { auth, db } from "../../../../firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-function Session() {
-  const [sessionTitle, setSessionTitle] = useState();
-  const [sessionAbout, setSessionAbout] = useState();
-
-  useEffect(() => {
-    const user = auth.currentUser;
-    console.log(user)
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log(uid);
-        fetchUserData(uid);
-      } else {
-      }
-    });
-  }, []);
-
-  let fetchUserData = async (uid) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const docRef = doc(db, 'users', uid);
-    const docSnap = await getDoc(docRef);
-    const data = docSnap.data();
-    if (docSnap.exists()) {
-      setSessionTitle(data.sessionTitle);
-      setSessionAbout(data.sessionAbout);
-    } else {
-      console.log("No such document!");
-    }
-  }
+function Session({data}) {
 
   return (
     <>
@@ -61,15 +28,14 @@ function Session() {
                 <img src={sesionThumbnail} alt='thumbnail' />
               </div>
               <div className='session-content'>
-                <h1 className='gradient__text'>{sessionTitle}</h1>
-                <p>{sessionAbout}</p>
+                <h1 className='gradient__text'>{data.sessionTitle}</h1>
+                <p>{data.sessionAbout}</p>
                 <div className='session-content-button'>
                   <button type='button'>Explore</button>
                 </div>
               </div>
             </div>
           </SwiperSlide>
-
         </Swiper>
       </div>
     </>

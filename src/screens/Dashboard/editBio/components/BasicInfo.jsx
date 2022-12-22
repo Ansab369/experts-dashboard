@@ -11,7 +11,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 function BasicInfo() {
-  const [userName, setUserName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
   const [userlocation, setLocation] = useState();
   const [userOrganization, setOrganization] = useState();
   const [userAbout, setAboutUser] = useState();
@@ -44,7 +45,8 @@ function BasicInfo() {
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
     if (docSnap.exists()) {
-      setUserName(data.username);
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
       setLocation(data.location);
       setOrganization(data.organization);
       setAboutUser(data.about);
@@ -62,7 +64,8 @@ function BasicInfo() {
       const docRef = doc(db, 'users', user.uid);
       setDoc(docRef, {
         //! bio
-        username: userName ?? '',  //! is null check needed..
+        firstName: firstName ?? '', 
+        lastName: LastName ?? '', 
         location: userlocation ?? '',
         organization: userOrganization ?? '',
         about: userAbout ?? '',
@@ -111,12 +114,21 @@ function BasicInfo() {
         <div className="Container" >
           {/* //!  name */}
           <div className="textfieldinfo">
-            <p>Name</p>
+            <p>First name</p>
           </div>
           <div className="textfield">
             <input type="text" id="lname" name="lname" placeholder="Username"
-              value={userName}
-              onChange={(e) => { setUserName(e.target.value) }}
+              value={firstName}
+              onChange={(e) => { setFirstName(e.target.value) }}
+            ></input>
+          </div>
+          <div className="textfieldinfo">
+            <p>Last Name</p>
+          </div>
+          <div className="textfield">
+            <input type="text" id="lname" name="lname" placeholder="Username"
+              value={LastName}
+              onChange={(e) => { setLastName(e.target.value) }}
             ></input>
           </div>
           {/* //! image select */}
@@ -166,7 +178,7 @@ function BasicInfo() {
           {/* //! Education */}
           <div className="addlocation">
             <p>Education</p>
-            <FontAwesomeIcon className="icon2" icon={faSquarePlus} />
+            {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
           </div>
           <div className="textfield">
             <input type="text" id="lname" name="lname" placeholder="Your Education Details.."
