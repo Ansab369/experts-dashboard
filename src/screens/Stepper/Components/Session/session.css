@@ -69,3 +69,25 @@
     color: #000000;
     opacity: 0.6;
 }
+.icon49{
+    color: rgb(192, 20, 20);
+    height: 20px;
+    cursor: pointer;
+    float: right;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.top-Padding p{
+    padding-top: 20px;
+}
+.textfieldSocial2 input[type=file]{
+    /* width: 90%; */
+    padding: 8px;
+    font-size: 16px;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    /* background: #F1F6FC; */
+    /* border: 4px solid #E6EEFC; */
+    border-radius: 10px;
+}

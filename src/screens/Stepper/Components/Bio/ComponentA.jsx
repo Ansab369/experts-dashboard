@@ -1,7 +1,12 @@
-import React ,{useRef} from "react";
+import React ,{useState} from "react";
 import './componentA.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faSquarePlus ,faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+
+import { db, auth } from "../../../../firebase";
+import { setDoc, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 const TagsInput = ({ tags, setTags }) => {
@@ -32,7 +37,55 @@ const TagsInput = ({ tags, setTags }) => {
 
 
 
-function ComponentA({ updateField, formData ,setProfileImage}) {
+function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
+  const steps = ["Bio", "Social", "Session", "Video"];
+  const [firstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [profileImage, setProfileImage] = useState(null);
+  const [userlocation, setLocation] = useState();
+  const [userOrganization, setOrganization] = useState();
+  const [userAbout, setAboutUser] = useState();
+  const [userEducation, setUserEducation] = useState();
+  const [userExpertIn, setUserExpertIn] = useState([]);
+  const [userSkills, setUserSkills] = useState([]);
+
+  
+  // !  use update methord..
+  let sentUsernsme = async (user ,profilePicUrl) => {
+    try {
+      const docRef = doc(db, 'users', user.uid);
+      setDoc(docRef, {
+        firstName: firstName ?? '', 
+        lastName: LastName ?? '',
+        userImageUrl: profilePicUrl, 
+        location: userlocation ?? '',
+        organization: userOrganization ?? '',
+        about: userAbout ?? '',
+        education: userEducation ?? '',
+        expertsIn: userExpertIn ?? '',
+        skills: userSkills ?? '',
+      }, { merge: true });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: =======", e);
+    }
+  }
+
+  async function sentDataToFireBase() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const storage = getStorage();
+    const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
+
+     let snapshot =await uploadBytes(storageRef, profileImage);
+     let url = await getDownloadURL(snapshot.ref) ;
+    //  setUserUrl(url);
+     sentUsernsme(user, url);
+    // sentUsernsme(user);
+    nextButtonClicked();
+    return;
+  }
+
   // const fileInput = useRef(null)
  const uploadFile=(e)=> {
     let file = e.target.files[0];
@@ -48,6 +101,7 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
     console.log(tags);
   };
   return (
+    <div>
     <div className="ComponentA">
       <div className="infotext">
         <FontAwesomeIcon className="icon7" icon={faCircleInfo} />
@@ -59,13 +113,19 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
           <p>First Name</p>
         </div>
         <div className="textfield">
-          <input type="text" id="lname" name="lname" placeholder="first name" value={formData['firstName']} onChange={(e) => updateField('firstName', e.target.value)}></input>
+          <input type="text" id="lname" name="lname" placeholder="first name"
+           value={firstName}
+           onChange={(e) => { setFirstName(e.target.value) }}
+           ></input>
         </div>
         <div className="textfieldinfo">
           <p>Last Name</p>
         </div>
         <div className="textfield">
-          <input type="text" id="lname" name="lname" placeholder="last name" value={formData['lastName']} onChange={(e) => updateField('lastName', e.target.value)}></input>
+          <input type="text" id="lname" name="lname" placeholder="last name" 
+          value={LastName}
+          onChange={(e) => { setLastName(e.target.value) }}
+           ></input>
         </div>
         {/* //! image select */}
         <div className="textfieldinfo">
@@ -73,7 +133,7 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
         </div>
         <div className="container-button1">
           {/* <button className="button0" onClick={() => fileInput.current.click()}>Select Image</button> */}
-          <input type="file" name='Selct image' className="button90"onChange={uploadFile}/>
+          <input type="file" name='Selct image' className="button90" onChange={uploadFile}/>
         </div>
         {/* //! location */}
         <div className="addlocation">
@@ -81,7 +141,10 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
           {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
         </div>
         <div className="textfield">
-          <input type="text" id="lname" name="lname" placeholder="Enter Your Location" value={formData['location']} onChange={(e) => updateField('location', e.target.value)} ></input>
+          <input type="text" id="lname" name="lname" placeholder="Enter Your Location"
+           value={userlocation}
+           onChange={(e) => { setLocation(e.target.value) }}
+            ></input>
         </div>
         {/* //! working at */}
         <div className="addlocation">
@@ -89,7 +152,10 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
           {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
         </div>
         <div className="textfield">
-          <input type="text" id="lname" name="lname" placeholder="Enter Your Organization" value={formData['organization']} onChange={(e) => updateField('organization', e.target.value)} ></input>
+          <input type="text" id="lname" name="lname" placeholder="Enter Your Organization" 
+          value={userOrganization}
+          onChange={(e) => { setOrganization(e.target.value) }}
+           ></input>
         </div>
 
         {/* //!  about */}
@@ -102,8 +168,9 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
             cols="45"
             name="description"
             placeholder="About You.."
-            value={formData['about']}
-            onChange={(e) => updateField('about', e.target.value)}>
+            value={userAbout}
+            onChange={(e) => { setAboutUser(e.target.value) }}
+            >
           </textarea>
         </div>
         {/* //! Education */}
@@ -112,7 +179,10 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
           <FontAwesomeIcon className="icon2" icon={faSquarePlus} />
         </div>
         <div className="textfield">
-          <input type="text" id="lname" name="lname" placeholder="Your Education Details.." value={formData['education']} onChange={(e) => updateField('education', e.target.value)}></input>
+          <input type="text" id="lname" name="lname" placeholder="Your Education Details.." 
+          value={userEducation}
+          onChange={(e) => { setUserEducation(e.target.value) }}
+          ></input>
         </div>
 
         {/* //! Tag Session 1  -- Expert In   */}
@@ -120,12 +190,32 @@ function ComponentA({ updateField, formData ,setProfileImage}) {
         <div className="addlocation">
           <p>Expert In</p>
         </div>
-        <TagsInput selectedTags={selectedTags} tags={formData.expertsIn ?? []} setTags={tags => updateField('expertsIn', tags)} />
+        <TagsInput selectedTags={selectedTags} 
+        tags={userExpertIn ?? []}
+        setTags={tags => setUserExpertIn(tags)} />
         {/* //! Tag Session 2 -- Skills */}
         <div className="addlocation">
           <p>Skills</p>
         </div>
-        <TagsInput selectedTags={selectedTags} tags={formData.skills ?? []} setTags={tags => updateField('skills', tags)} />
+        <TagsInput selectedTags={selectedTags} 
+        tags={userSkills ?? []}
+        setTags={tags => setUserSkills(tags)}
+         />
+      </div>
+    </div>
+
+
+
+    <div className="maxwidth" >
+        <span className="iconbuttton" onClick={onBackIconClicked}>
+          <FontAwesomeIcon className={currentStep === 1 ? "icon6" : "icon5"} id="backarrow" icon={faArrowLeft} />
+        </span>
+        <button
+          className="btn"
+          onClick={sentDataToFireBase}
+          >
+          {currentStep === steps.length ? "Finish" : "Next"}
+        </button>
       </div>
     </div>
   );

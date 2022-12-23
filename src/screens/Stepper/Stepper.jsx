@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
 import './stepper.css';
 import logo from '../../assets/Tottologo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,9 +47,9 @@ function Stepper() {
         socialMediaTwitter: formData['socialMediaTwitter'] ?? "",
         socialMediaLinkedIn: formData['socialMediaLinkedIn'] ?? "",
         //! session
-        sessionTitle: formData['sessionTitle'] ?? "",
-        sessionAbout: formData['sessionAbout'] ?? "",
-        sessionLink: formData['sessionLink'] ?? "",
+        sessionData: formData['sessionData'] ?? "",
+        // sessionAbout: formData['sessionAbout'] ?? "",
+        // sessionLink: formData['sessionLink'] ?? "",
         //! video
         videoTitle: formData['videoTitle'] ?? "",
         videoAbout: formData['videoAbout'] ?? "",
@@ -70,9 +70,17 @@ function Stepper() {
 
      let snapshot =await uploadBytes(storageRef, profileImage);
      let url = await getDownloadURL(snapshot.ref) ;
-     setUserUrl(url);
+    //  setUserUrl(url);
      sentUsernsme(user, url);
     currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
+    return;
+  }
+   function nextButtonClicked () {
+    currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
+    return;
+  }
+   function onBackIconClicked () {
+    currentStep === steps.length + 1 ? setComplete(true) : setCurrentStep((prev) => prev - 1);
     return;
   }
 
@@ -113,13 +121,14 @@ function Stepper() {
           { }
           <div>
             {
-              currentStep === 1 ? <ComponentA formData={formData} updateField={updateField} setProfileImage={setProfileImage} /> :
-                currentStep === 2 ? <Social formData={formData} updateField={updateField} /> :
-                  currentStep === 3 ? <Session formData={formData} updateField={updateField} /> :
-                    currentStep === 4 ? <Video formData={formData} updateField={updateField} /> : null
+              // currentStep === 1 ? <ComponentA formData={formData} updateField={updateField} setProfileImage={setProfileImage} /> :
+              currentStep === 1 ? <ComponentA onBackIconClicked={onBackIconClicked} nextButtonClicked={nextButtonClicked} currentStep={currentStep}/> :
+                currentStep === 2 ? <Social onBackIconClicked={onBackIconClicked} nextButtonClicked={nextButtonClicked} currentStep={currentStep} /> :
+                  currentStep === 3 ? <Session  onBackIconClicked={onBackIconClicked} nextButtonClicked={nextButtonClicked} currentStep={currentStep}/> :
+                    currentStep === 4 ? <Video onBackIconClicked={onBackIconClicked} nextButtonClicked={nextButtonClicked} currentStep={currentStep} /> : null
             }
           </div>
-          <div className="maxwidth" >
+          {/* <div className="maxwidth" >
             <span className="iconbuttton" onClick={() => { currentStep === steps.length + 1 ? setComplete(true) : setCurrentStep((prev) => prev - 1); }}>
               <FontAwesomeIcon className={currentStep === 1 ? "icon6" : "icon5"} id="backarrow" icon={faArrowLeft} />
 
@@ -129,7 +138,7 @@ function Stepper() {
               onClick={sentDetailsToFirebase}>
               {currentStep === steps.length ? "Finish" : "Next"}
             </button>
-          </div>
+          </div> */}
         </div>
       )}
       {/* //! */}
