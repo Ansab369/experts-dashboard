@@ -96,7 +96,6 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
     }
 }
 
-
   const selectedTags = tags => {
     console.log(tags);
   };
@@ -109,8 +108,11 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
       </div>
       <div className="Container" >
         {/* //!  name */}
-        <div className="textfieldinfo">
+        <div className="textfieldinfo1">
           <p>First Name</p>
+          <div className="error-Text">
+          <p >First Name</p>
+          </div>
         </div>
         <div className="textfield">
           <input type="text" id="lname" name="lname" placeholder="first name"
@@ -118,7 +120,10 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
            onChange={(e) => { setFirstName(e.target.value) }}
            ></input>
         </div>
-        <div className="textfieldinfo">
+
+
+
+        <div className="textfieldinfo1">
           <p>Last Name</p>
         </div>
         <div className="textfield">
@@ -128,7 +133,7 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
            ></input>
         </div>
         {/* //! image select */}
-        <div className="textfieldinfo">
+        <div className="textfieldinfo1">
           <p>Image</p>
         </div>
         <div className="container-button1">
@@ -159,7 +164,7 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
         </div>
 
         {/* //!  about */}
-        <div className="textfieldinfo">
+        <div className="textfieldinfo1">
           <p>About</p>
         </div>
         <div className="textfield">
