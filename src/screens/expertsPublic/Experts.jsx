@@ -67,10 +67,11 @@ const Experts = () => {
       <div className='curve_background'>
         <Navbar />
         <Header data={data}/>
-      </div>
-      <Social data={data}/>
-      <Session data={data}/>
-      <Videos data={data}/>
+      </div>  
+      {/* {data.socialMediaInstagram ==='' && data.socialMediaFacebook ==='' && data.socialMediaLinkedIn ==='' &&data.socialMediaTwitter===''&&data.socialMediaYoutube===''? '':<Social data={data}/>} */}
+      {data.socialMediaFacebook === "" &&  data.socialMediaInstagram === "" &&  data.socialMediaLinkedIn === "" &&  data.socialMediaTwitter === "" &&  data.socialMediaYoutube === ""  ? '':<Social data={data}/>}
+      {data.sessionData===[]? <Session data={data}/>:''}
+      {data.videoDatas===[]? <Videos data={data}/>:''}
       <Connect data={data} />
       <Footer />
     </div>

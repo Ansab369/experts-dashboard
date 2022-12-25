@@ -2,42 +2,11 @@ import React, { useState, useEffect } from "react";
 import './session.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faTrash, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
 import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-// import { db } from "../../firebase";
-// import { setDoc, doc } from "firebase/firestore";
-// import { getAuth } from "firebase/auth";
 
-// let sentUsernsme = async (user, profilePicUrl) => {
-//   try {
-//     const docRef = doc(db, 'users', user.uid);
-//     setDoc(docRef, {
-//       //! bio
-//       firstName: formData['firstName'] ?? '',
-
-
-//     }, { merge: true });
-//     console.log("Document written with ID: ", docRef.id);
-//   } catch (e) {
-//     console.error("Error adding document: =======", e);
-//   }
-// }
-
-// async function sentDetailsToFirebase () {
-//   const auth = getAuth();
-//   const user = auth.currentUser;
-//   const storage = getStorage();
-
-//    let snapshot =await uploadBytes(storageRef, profileImage);
-//    let url = await getDownloadURL(snapshot.ref) ;
-//    setUserUrl(url);
-//    sentUsernsme(user, url);
-//   currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
-//   return;
-// }
 
 function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const steps = ["Bio", "Social", "Session", "Video"];
@@ -102,6 +71,7 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
         </div>
         <div className="Container" >
           {/* //! */}
+
           {data.map((e, i) => (
             <Form key={i} data={e} onUpdateField={(field, value) => { data[i][field] = value; setData([...data]) }} onDelete={() => deleteRow(i)} />
           ))}

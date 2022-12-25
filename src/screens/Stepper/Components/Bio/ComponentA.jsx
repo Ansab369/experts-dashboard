@@ -39,22 +39,28 @@ const TagsInput = ({ tags, setTags }) => {
 
 function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
   const steps = ["Bio", "Social", "Session", "Video"];
-  const [firstName, setFirstName] = useState();
-  const [LastName, setLastName] = useState();
+  const [firstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
   const [profileImage, setProfileImage] = useState(null);
-  const [userlocation, setLocation] = useState();
-  const [userOrganization, setOrganization] = useState();
-  const [userAbout, setAboutUser] = useState();
-  const [userEducation, setUserEducation] = useState();
+  const [userlocation, setLocation] = useState('');
+  const [userOrganization, setOrganization] = useState('');
+  const [userAbout, setAboutUser] = useState('');
+  const [userEducation, setUserEducation] = useState('');
   const [userExpertIn, setUserExpertIn] = useState([]);
   const [userSkills, setUserSkills] = useState([]);
+
+
+
 
   
   // !  use update methord..
   let sentUsernsme = async (user ,profilePicUrl) => {
+
+
     try {
       const docRef = doc(db, 'users', user.uid);
       setDoc(docRef, {
+        // firstName: firstName ?? '', 
         firstName: firstName ?? '', 
         lastName: LastName ?? '',
         userImageUrl: profilePicUrl, 
@@ -70,8 +76,118 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
       console.error("Error adding document: =======", e);
     }
   }
+  // const errors = [];
+  const [isValidated,setValidation]=useState();
 
+  const [firstNameError,setFirstNameError]=useState('');
+  const [secondNmeError,setSecondNameError]=useState('');
+  const [profileError,setProfileError]=useState('');
+  const [locationError,setLocationError]=useState('');
+  const [organizationError,setOrganizationError]=useState('');
+  const [aboutError,setAboutError]=useState('');
+  const [educationError,setEducationError]=useState('');
+  const [expertsInError,setExpertsInError]=useState('');
+  const [skillsError,setSkillsError]=useState('');
+    function Validation(){
+
+      if(firstName===''){
+        setFirstNameError('Enter First Name');
+        setValidation(false);
+       console.log(isValidated);
+        
+      }else if(firstName.length>=20){
+        setFirstNameError('maximum 20 charactors');
+        setValidation(false);
+      }else{
+        setFirstNameError('');
+      }
+
+
+      if(LastName===''){
+        setSecondNameError('Enter Last Name');
+        setValidation(false);
+      }else if(LastName.length>=20){
+        setSecondNameError('maximum 20 charactors');
+        setValidation(false);
+      }
+      else{
+        setSecondNameError('');
+      }
+
+      if(profileImage===null){
+        setProfileError('Upload profile pic');
+        setValidation(false);
+      }else{
+        setProfileError('');
+        setValidation(true);
+
+      }
+
+      if(userlocation===''){
+        setLocationError('Enter your location');
+        setValidation(false);
+      }else{
+        setLocationError('');
+      }
+
+      if(userOrganization===''){
+        setOrganizationError('Enter your Organization');
+        setValidation(false);
+      }else{
+        setOrganizationError('');
+      }
+
+      if(userAbout===''){
+        setAboutError('Enter about you.');
+        setValidation(false);
+      }else{
+        setAboutError('');
+      }
+
+      if(userEducation===''){
+        setEducationError('Enter your education details.');
+        setValidation(false);
+      }else{
+        setEducationError('');
+      }
+
+      if(userExpertIn.length===0){
+        setExpertsInError('Enter your proffesion Tags.');
+        setValidation(false);
+      }else{
+        setExpertsInError('');
+      }
+
+      if(userSkills.length===0){
+        setSkillsError('Enter your Skills');
+        setValidation(false);
+      }else{
+        setSkillsError('');
+      }
+
+
+    }
+    // function lastNameValidation(){
+      
+    // }
+
+  
   async function sentDataToFireBase() {
+    
+    // handleSubmit();
+    // console.log(isValidated);
+
+    Validation();
+    // lastNameValidation();
+
+    // console.log(isValidated);
+
+
+
+ //!====================
+ if(isValidated){
+
+ 
     const auth = getAuth();
     const user = auth.currentUser;
     const storage = getStorage();
@@ -83,6 +199,7 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
      sentUsernsme(user, url);
     // sentUsernsme(user);
     nextButtonClicked();
+  }
     return;
   }
 
@@ -111,7 +228,7 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
         <div className="textfieldinfo1">
           <p>First Name</p>
           <div className="error-Text">
-          <p >First Name</p>
+               <p>{firstNameError}</p>
           </div>
         </div>
         <div className="textfield">
@@ -125,6 +242,9 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
 
         <div className="textfieldinfo1">
           <p>Last Name</p>
+          <div className="error-Text">
+               <p>{secondNmeError}</p>
+          </div>
         </div>
         <div className="textfield">
           <input type="text" id="lname" name="lname" placeholder="last name" 
@@ -135,14 +255,20 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
         {/* //! image select */}
         <div className="textfieldinfo1">
           <p>Image</p>
+          <div className="error-Text">
+               <p>{profileError}</p>
+          </div>
         </div>
         <div className="container-button1">
           {/* <button className="button0" onClick={() => fileInput.current.click()}>Select Image</button> */}
           <input type="file" name='Selct image' className="button90" onChange={uploadFile}/>
         </div>
         {/* //! location */}
-        <div className="addlocation">
+        <div className="textfieldinfo1">
           <p>Location</p>
+          <div className="error-Text">
+               <p>{locationError}</p>
+          </div>
           {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
         </div>
         <div className="textfield">
@@ -152,8 +278,11 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
             ></input>
         </div>
         {/* //! working at */}
-        <div className="addlocation">
+        <div className="textfieldinfo1">
           <p>Working at</p>
+          <div className="error-Text">
+               <p>{organizationError}</p>
+          </div>
           {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
         </div>
         <div className="textfield">
@@ -166,6 +295,9 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
         {/* //!  about */}
         <div className="textfieldinfo1">
           <p>About</p>
+          <div className="error-Text">
+               <p>{aboutError}</p>
+          </div>
         </div>
         <div className="textfield">
           <textarea className="textfield-about"
@@ -179,9 +311,12 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
           </textarea>
         </div>
         {/* //! Education */}
-        <div className="addlocation">
+        <div className="textfieldinfo1">
           <p>Education</p>
-          <FontAwesomeIcon className="icon2" icon={faSquarePlus} />
+          <div className="error-Text">
+               <p>{educationError}</p>
+          </div>
+          {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
         </div>
         <div className="textfield">
           <input type="text" id="lname" name="lname" placeholder="Your Education Details.." 
@@ -192,15 +327,21 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
 
         {/* //! Tag Session 1  -- Expert In   */}
 
-        <div className="addlocation">
+        <div className="textfieldinfo1">
           <p>Expert In</p>
+          <div className="error-Text">
+               <p>{expertsInError}</p>
+          </div>
         </div>
         <TagsInput selectedTags={selectedTags} 
         tags={userExpertIn ?? []}
         setTags={tags => setUserExpertIn(tags)} />
         {/* //! Tag Session 2 -- Skills */}
-        <div className="addlocation">
+        <div className="textfieldinfo1">
           <p>Skills</p>
+          <div className="error-Text">
+               <p>{skillsError}</p>
+          </div>
         </div>
         <TagsInput selectedTags={selectedTags} 
         tags={userSkills ?? []}

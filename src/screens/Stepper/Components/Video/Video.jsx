@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import './video.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-
 import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -13,9 +12,11 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   useEffect(() => {
     addComponent();
+    console.log('useEffect called');
   }, []);
 
   function addComponent() {
+    console.log("added component");
     console.log(videodata);
     setVideoData(
       [...videodata, {
@@ -24,27 +25,34 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
         'link': "",
       }]
     )
+    console.log('video data,=====',videodata);
+
   }
   function deleteRow(e) {
     videodata.splice(e, 1)
     console.log(videodata)
+    console.log('deletedd data,=====',videodata);
     setVideoData([...videodata])
   }
 
   // !  use update methord..
-  let sentUsernsme = async (user, profilePicUrl) => {
+  let sentUsernsme = async (user) => {
     try {
       const docRef = doc(db, 'users', user.uid);
       setDoc(docRef, {
-        //!
+        videoDatas: videodata,
       }, { merge: true });
       console.log("Document written with ID: ", docRef.id);
+    console.log('sented to server =   data,=====',videodata);
     } catch (e) {
       console.error("Error adding document: =======", e);
+      console.log('not sented data data,=====',videodata);
+
     }
   }
 
   async function sentDataToFireBase() {
+    console.log('senting to derver= data,=====',videodata);
     const auth = getAuth();
     const user = auth.currentUser;
     // const storage = getStorage();
@@ -54,8 +62,9 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
     //  let url = await getDownloadURL(snapshot.ref) ;
     //  setUserUrl(url);
     //  sentUsernsme(user, url);
+    const docRef = doc(db, 'users', user.uid);
     sentUsernsme(user);
-    nextButtonClicked();
+    // nextButtonClicked();
     return;
   }
 
