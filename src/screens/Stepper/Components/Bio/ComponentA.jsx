@@ -60,7 +60,6 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
     try {
       const docRef = doc(db, 'users', user.uid);
       setDoc(docRef, {
-        // firstName: firstName ?? '', 
         firstName: firstName ?? '', 
         lastName: LastName ?? '',
         userImageUrl: profilePicUrl, 
@@ -76,8 +75,6 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
       console.error("Error adding document: =======", e);
     }
   }
-  // const errors = [];
-  const [isValidated,setValidation]=useState();
 
   const [firstNameError,setFirstNameError]=useState('');
   const [secondNmeError,setSecondNameError]=useState('');
@@ -92,12 +89,8 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
 
       if(firstName===''){
         setFirstNameError('Enter First Name');
-        setValidation(false);
-       console.log(isValidated);
-        
       }else if(firstName.length>=20){
         setFirstNameError('maximum 20 charactors');
-        setValidation(false);
       }else{
         setFirstNameError('');
       }
@@ -105,10 +98,8 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
 
       if(LastName===''){
         setSecondNameError('Enter Last Name');
-        setValidation(false);
       }else if(LastName.length>=20){
         setSecondNameError('maximum 20 charactors');
-        setValidation(false);
       }
       else{
         setSecondNameError('');
@@ -116,100 +107,73 @@ function ComponentA({currentStep,onBackIconClicked,nextButtonClicked}) {
 
       if(profileImage===null){
         setProfileError('Upload profile pic');
-        setValidation(false);
       }else{
         setProfileError('');
-        setValidation(true);
-
       }
 
       if(userlocation===''){
         setLocationError('Enter your location');
-        setValidation(false);
       }else{
         setLocationError('');
       }
 
       if(userOrganization===''){
         setOrganizationError('Enter your Organization');
-        setValidation(false);
       }else{
         setOrganizationError('');
       }
 
       if(userAbout===''){
         setAboutError('Enter about you.');
-        setValidation(false);
       }else{
         setAboutError('');
       }
 
       if(userEducation===''){
         setEducationError('Enter your education details.');
-        setValidation(false);
       }else{
         setEducationError('');
       }
 
       if(userExpertIn.length===0){
         setExpertsInError('Enter your proffesion Tags.');
-        setValidation(false);
       }else{
         setExpertsInError('');
       }
 
       if(userSkills.length===0){
         setSkillsError('Enter your Skills');
-        setValidation(false);
       }else{
         setSkillsError('');
       }
 
 
     }
-    // function lastNameValidation(){
-      
-    // }
 
   
   async function sentDataToFireBase() {
-    
-    // handleSubmit();
-    // console.log(isValidated);
-
     Validation();
-    // lastNameValidation();
+      // console.log(firstNameError);
 
-    // console.log(isValidated);
-
-
-
- //!====================
- if(isValidated){
-
- 
+    // if(firstNameError!=''&& secondNmeError!=''&&profileError!='' &&locationError!=''&&organizationError!=''&&aboutError!=''&&educationError!=''&&expertsInError!=''&&skillsError!=''){
+    if(firstName!=''&& LastName!=''&& profileImage!=null && userlocation!='' && userOrganization!='' && userAbout!='' &&userEducation!=''){
     const auth = getAuth();
     const user = auth.currentUser;
     const storage = getStorage();
     const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
-
-     let snapshot =await uploadBytes(storageRef, profileImage);
-     let url = await getDownloadURL(snapshot.ref) ;
-    //  setUserUrl(url);
-     sentUsernsme(user, url);
-    // sentUsernsme(user);
+    let snapshot =await uploadBytes(storageRef, profileImage);
+    let url = await getDownloadURL(snapshot.ref) ;
+    sentUsernsme(user, url);
     nextButtonClicked();
   }
     return;
   }
 
-  // const fileInput = useRef(null)
  const uploadFile=(e)=> {
     let file = e.target.files[0];
      console.log('file name 1  : ',file.name);
     if (file) {
       setProfileImage(file);
-      // let data = new FormData();
     }
 }
 
