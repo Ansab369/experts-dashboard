@@ -1,7 +1,7 @@
 import React from "react";
 import './social.css';
 import { Facebook, Instagram, Twitter, LinkedIn } from './import.js';
-import Youtube from '../../../../assets/expertsAssets/youtube.png';
+import Youtube from '../../../../assets/youtube.png';
 
 function Social({ data }) {
 
