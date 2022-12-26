@@ -12,12 +12,11 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   useEffect(() => {
     addComponent();
-    console.log('useEffect called');
   }, []);
 
   function addComponent() {
-    console.log("added component");
-    console.log(videodata);
+    // console.log("added component");
+    // console.log(videodata);
     setVideoData(
       [...videodata, {
         'title': "",
@@ -25,13 +24,11 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
         'link': "",
       }]
     )
-    console.log('video data,=====',videodata);
 
   }
   function deleteRow(e) {
     videodata.splice(e, 1)
     console.log(videodata)
-    console.log('deletedd data,=====',videodata);
     setVideoData([...videodata])
   }
 
@@ -42,17 +39,12 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
       setDoc(docRef, {
         videoDatas: videodata,
       }, { merge: true });
-      console.log("Document written with ID: ", docRef.id);
-    console.log('sented to server =   data,=====',videodata);
     } catch (e) {
-      console.error("Error adding document: =======", e);
-      console.log('not sented data data,=====',videodata);
 
     }
   }
 
   async function sentDataToFireBase() {
-    console.log('senting to derver= data,=====',videodata);
     const auth = getAuth();
     const user = auth.currentUser;
     // const storage = getStorage();
@@ -64,7 +56,7 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
     //  sentUsernsme(user, url);
     const docRef = doc(db, 'users', user.uid);
     sentUsernsme(user);
-    // nextButtonClicked();
+    nextButtonClicked();
     return;
   }
 
