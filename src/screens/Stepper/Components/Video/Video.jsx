@@ -5,10 +5,12 @@ import { faCircleInfo, faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-
 import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import HashLoader from "react-spinners/HashLoader";
 
 function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const steps = ["Bio", "Social", "Session", "Video"];
   const [videodata, setVideoData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     addComponent();
@@ -45,6 +47,7 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
   }
 
   async function sentDataToFireBase() {
+    setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
     // const storage = getStorage();
@@ -64,6 +67,21 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   return (
     <div>
+      {
+        loading === true ?
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: "100%",
+          }}>
+            <HashLoader color="#8B77EE" />
+          </div> : ''
+      }
       <div className="ComponentA">
         <div className="infotext">
           <FontAwesomeIcon className="icon7" icon={faCircleInfo} />

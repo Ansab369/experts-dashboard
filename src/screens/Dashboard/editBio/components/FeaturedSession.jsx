@@ -14,9 +14,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 function FeaturedSession() {
-  // const [userData, setData] = useState();
   const [data, setData] = useState([]);
-  // const [featuredData, setfeaturedData] = useState();
   
   useEffect(() => {
     const user = auth.currentUser;

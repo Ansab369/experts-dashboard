@@ -6,18 +6,60 @@ import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import HashLoader from "react-spinners/HashLoader";
 
 
 function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const steps = ["Bio", "Social", "Session", "Video"];
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  // useEffect(() => {
+  //   addComponent();
+  // }, []);
+ //! fetch data
   useEffect(() => {
-    addComponent();
+
+    const user = auth.currentUser;
+    console.log(user)
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid);
+        fetchUserData(uid);
+      } else {
+
+      }
+    });
   }, []);
+
+  let fetchUserData = async (uid) => {
+    const docRef = doc(db, 'users', uid);
+    const docSnap = await getDoc(docRef);
+    const fetchdata = docSnap.data();
+    if (docSnap.exists()) {
+      console.log('fetched data=========',fetchdata)
+      console.log('data fetched ==========')
+      console.log('data session ==========',fetchdata.sessionData)
+
+      if(fetchdata.sessionData===undefined){
+       addComponent();
+
+        // setData(fetchdata.sessionData);
+      }else{
+        setData(fetchdata.sessionData);
+
+      //  addComponent();
+
+      }
+    } else {
+      console.log("No such document!");
+    }
+  }
 
 
   async function sentDataToFireBase() {
+    setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
     
@@ -42,8 +84,8 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
     nextButtonClicked();
     return;
   }
-  // const sessionData = []
-  // const [index, setIndex] = useState(1);
+
+
   function addComponent() {
     console.log(data);
     setData(
@@ -64,6 +106,21 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   return (
     <div>
+            {
+        loading === true ?
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: "100%",
+          }}>
+            <HashLoader color="#8B77EE" />
+          </div> : ''
+      }
       <div className="ComponentA">
         <div className="infotext">
           <FontAwesomeIcon className="icon7" icon={faCircleInfo} />

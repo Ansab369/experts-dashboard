@@ -45,7 +45,7 @@ function Login() {
                     setLoginError('');
                 }
             })
-        } else { setLoginError('Enter email'); }
+        } else { setLoginError('Invalid Email!'); }
     }
     const PasswordHide = () => {
         if (eyeIcon === faEyeSlash) {

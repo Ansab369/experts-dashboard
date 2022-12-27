@@ -20,9 +20,10 @@ function SignUp() {
   const [linkName, setLinkName] = useState("");
   const [user, setUser] = useState(null);
   const [signUpError, setSignUpError] = useState("");
-  const [show_input1, setshow_input1] = useState(true);
+
+  const [show_input1, setshow_input1] = useState(false);
   const [show_input2, setshow_input2] = useState(false);
-  const [eyeIcon1, setEyeIcon1] = useState(faEyeSlash);
+  const [eyeIcon1, setEyeIcon1] = useState(faEye);
   const [eyeIcon2, setEyeIcon2] = useState(faEye);
 
   const [usernameIcon, setUsernameIcon] = useState(false);
@@ -48,6 +49,9 @@ function SignUp() {
       const usersRef = collection(db, 'users');
       const q = query(usersRef, where('linkName', '==', linkName));
       const querySnapshot = await getDocs(q);
+      if(linkName===''){
+         setSignUpError('Enter Username');
+      }else{
       if (querySnapshot.size > 0) {
         setSignUpError('This username is already in use.');
         setUsernameIcon(false);
@@ -69,14 +73,14 @@ function SignUp() {
             if (errorCode == 'auth/internal-error') {
               setSignUpError('Enter email and password !');
             } else if (errorCode == 'auth/invalid-email') {
-              setSignUpError('Enter email !');
+              setSignUpError('Enter a valid Email !');
             } else if(errorCode == 'auth/weak-password') {
               setSignUpError('Password has to be min. 8 chars.');
             }else if (errorCode == 'auth/email-already-in-use') {
               setSignUpError('Email alredy in use.');
             }
           }) : setSignUpError('Password not matching.');
-      }
+      }}
     } else {
       setSignUpError('Username must be letters');
       setUsernameIcon(false);
