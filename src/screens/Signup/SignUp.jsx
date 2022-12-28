@@ -119,7 +119,7 @@ function SignUp() {
           <p>SignUp to Start</p>
         </div>
         <div className="Login-Container-Text2">
-          <p >tottoLearing.com/experts/</p>
+          <p >tottolearning.com/experts/</p>
         </div>
         {/* // todo username */}
         <div className="custom-textfield">
