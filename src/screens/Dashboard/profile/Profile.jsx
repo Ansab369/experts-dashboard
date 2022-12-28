@@ -20,6 +20,7 @@ function Profile() {
   const[linkName,setLinkName] = useState();
   const[userProfile,setUserProfile] = useState();
   const[isLoading,setIsloading] = useState(true);
+  const [datas,setDatas]=useState();
 
   useEffect(() => {    
     const user=auth.currentUser;
@@ -45,6 +46,7 @@ function Profile() {
       const docSnap = await getDoc(docRef);
       const data = docSnap.data(); 
       if (docSnap.exists()) {
+        setDatas(data);
         setFirstName(data.firstName);
         setlastName(data.lastName);
         // setProffesion(data.expertsIn)
@@ -102,7 +104,7 @@ function Profile() {
         <div className="preview-2">
           <p className="preview-p1">tottolearning.com/experts/{linkName}<FontAwesomeIcon className="copyIcon" icon= {faCopy} /></p>
           <div className="copy-preview">
-            <Link to='/experts'><button className="btn">
+            <Link to={`/experts/${datas.linkName}`}><button className="btn">
                Preview
             </button></Link>
           </div>

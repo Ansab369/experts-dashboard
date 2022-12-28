@@ -35,7 +35,7 @@ function App() {
           <Route path="/signup/stepper" element={<PrivateRoute><Stepper /></PrivateRoute>} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/experts" element={<PrivateRoute><Experts /></PrivateRoute>} />
+          <Route path="/experts/:slug" element={<Experts />} />
         </Routes>
       </div>
     </Router>
