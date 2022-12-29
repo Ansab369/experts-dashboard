@@ -30,7 +30,7 @@ const TagsInput = ({ tags, setTags }) => {
         ))}
       </ul>
       <input type="text" onKeyUp={event => event.key === "," ? addTags(event) : null}
-        placeholder="Press enter to add tags" />
+        placeholder="Press ',' to add tags" />
     </div>
   );
 };
