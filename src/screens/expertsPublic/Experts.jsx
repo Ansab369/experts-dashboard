@@ -12,74 +12,58 @@ import HashLoader from "react-spinners/HashLoader";
 
 const Experts = () => {
   const [data, setData] = useState();
+  const [error, setError404] = useState(false);
   const obj= useParams();
     console.log(obj.slug);
 
   
   useEffect(() => {
-    // const q = query(collection(db, "cities"), where("capital", "==", true));
     fetchUserDataslug();
-
-    
-
-
-    // const user = auth.currentUser;
-    // console.log(user)
-    // onAuthStateChanged(auth, (user) => {
-    //   if (user) {
-    //     const uid = user.uid;
-    //     console.log(uid);
-    //     // fetchUserData(uid);
-    //   } else {
-
-    //   }
-    // });
   }, []);
 
   let fetchUserDataslug = async (uid) => {
   
     const q = query(collection(db,'users'), where('linkName', '==', obj.slug));
-    console.log('q is =====',q)
-    // const usersRef = collection(db, 'users');
-    // const q = query(usersRef, where('linkName', '==', obj));
+    // console.log('q is =====',q)
     const querySnapshot = await getDocs(q);
-    // const data = querySnapshot.data();
-    console.log('querySnapshot ======',querySnapshot);
-   if(querySnapshot){
+    // console.log('querySnapshot ======',querySnapshot);
+   if(querySnapshot.size!==0){
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log('fffggggggggggggggggggggggg')
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       
       setData(doc.data());
     });}else{
-      console.log('querySnapshot is empty')
+      console.log('link name does not exists.........');
+      setData('');
+      setError404(true);
+      // error404();
+
+      // return (
+     
+      // )
+
     }
-
-
-
-    // const docRef = doc(db, 'users', uid);
-    // const docSnap = await getDoc(docRef);
-    // const data = docSnap.data();
-    // if (docSnap.exists()) {
-    //   setData(data);
-    // } else {
-    //   console.log("No such document!");
-    // }
   }
-  // let fetchUserData = async (uid) => {
-  //   const docRef = doc(db, 'users', uid);
-  //   const docSnap = await getDoc(docRef);
-  //   const data = docSnap.data();
-  //   if (docSnap.exists()) {
-  //     setData(data);
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  // }
 
-
-
+    if(error){
+      return (
+    <div
+    style={{
+      flexDirection:'column',
+      color:'#8B77EE',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+      position: 'fixed',
+      left: 0,
+      top: 0,
+      width: "100%",
+    }}>
+      <h1 style={{textShadow: '2px 2px #c2c6cc',fontSize:'50px'}}>Error 404</h1>
+      <span style={{width:'120px',height:'5px',background:'#c2c6cc',borderRadius:'100px',margin:'10px'}}></span>
+      <p style={{fontSize:'18px',fontWeight:'bold'}}>Page Not Found</p>
+    </div>)}
 
 
   if(data==null){

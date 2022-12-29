@@ -48,9 +48,9 @@ function SignUp() {
     if (!regex.test(linkName)) {
       const usersRef = collection(db, 'users');
       const q = query(usersRef, where('linkName', '==', linkName));
-      console.log('q is =========',q);
+      // console.log('q is =========',q);
       const querySnapshot = await getDocs(q);
-      console.log('querySnapshot is =========',querySnapshot);
+      // console.log('querySnapshot is =========',querySnapshot);
       if(linkName===''){
          setSignUpError('Enter Username');
       }else{
