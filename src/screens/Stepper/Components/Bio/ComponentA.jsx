@@ -29,7 +29,7 @@ const TagsInput = ({ tags, setTags }) => {
           </li>
         ))}
       </ul>
-      <input type="text" onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
+      <input type="text" onKeyUp={event => event.key === "," ? addTags(event) : null}
         placeholder="Press enter to add tags" />
     </div>
   );
@@ -187,7 +187,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   async function sentDataToFireBase() {
     Validation();
-    if (firstName != '' && LastName != '' && profileImage != null && userlocation != '' && userOrganization != '' && userAbout != '' && userEducation != '') {
+    if (firstName !== '' && LastName !== '' && profileImage !== null && userlocation !== '' && userOrganization !== '' && userAbout !== '' && userEducation !== '') {
       setLoading(true);
       const auth = getAuth();
       const user = auth.currentUser;
@@ -342,7 +342,11 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
           </div>
           <TagsInput selectedTags={selectedTags}
             tags={userExpertIn ?? []}
-            setTags={tags => setUserExpertIn(tags)} />
+            setTags={tags => setUserExpertIn(tags)}/>
+
+
+
+
           {/* //! Tag Session 2 -- Skills */}
           <div className="textfieldinfo1">
             <p>Skills</p>

@@ -26,55 +26,55 @@ function Stepper() {
   
 
 
-  let sentUsernsme = async (user, profilePicUrl) => {
-    try {
-      const docRef = doc(db, 'users', user.uid);
-      setDoc(docRef, {
-        //! bio
-        firstName: formData['firstName'] ?? '',
-        lastName: formData['lastName'] ?? '',
-        userImageUrl: profilePicUrl,
-        location: formData['location'] ?? '',
-        organization: formData['organization'] ?? '',
-        about: formData['about'] ?? '',
-        education: formData['education'] ?? '',
-        expertsIn: formData['expertsIn'] ?? '',
-        skills: formData['skills'] ?? '',
-        //! social
-        socialMediaFacebook: formData['socialMediaFacebook'] ?? "",
-        socialMediaInstagram: formData['socialMediaInstagram'] ?? "",
-        socialMediaYoutube: formData['socialMediaYoutube'] ?? "",
-        socialMediaTwitter: formData['socialMediaTwitter'] ?? "",
-        socialMediaLinkedIn: formData['socialMediaLinkedIn'] ?? "",
-        //! session
-        sessionData: formData['sessionData'] ?? "",
-        // sessionAbout: formData['sessionAbout'] ?? "",
-        // sessionLink: formData['sessionLink'] ?? "",
-        //! video
-        videoTitle: formData['videoTitle'] ?? "",
-        videoAbout: formData['videoAbout'] ?? "",
-        videoLink: formData['videoLink'] ?? "",
+  // let sentUsernsme = async (user, profilePicUrl) => {
+  //   try {
+  //     const docRef = doc(db, 'users', user.uid);
+  //     setDoc(docRef, {
+  //       //! bio
+  //       firstName: formData['firstName'] ?? '',
+  //       lastName: formData['lastName'] ?? '',
+  //       userImageUrl: profilePicUrl,
+  //       location: formData['location'] ?? '',
+  //       organization: formData['organization'] ?? '',
+  //       about: formData['about'] ?? '',
+  //       education: formData['education'] ?? '',
+  //       expertsIn: formData['expertsIn'] ?? '',
+  //       skills: formData['skills'] ?? '',
+  //       //! social
+  //       socialMediaFacebook: formData['socialMediaFacebook'] ?? "",
+  //       socialMediaInstagram: formData['socialMediaInstagram'] ?? "",
+  //       socialMediaYoutube: formData['socialMediaYoutube'] ?? "",
+  //       socialMediaTwitter: formData['socialMediaTwitter'] ?? "",
+  //       socialMediaLinkedIn: formData['socialMediaLinkedIn'] ?? "",
+  //       //! session
+  //       sessionData: formData['sessionData'] ?? "",
+  //       // sessionAbout: formData['sessionAbout'] ?? "",
+  //       // sessionLink: formData['sessionLink'] ?? "",
+  //       //! video
+  //       videoTitle: formData['videoTitle'] ?? "",
+  //       videoAbout: formData['videoAbout'] ?? "",
+  //       videoLink: formData['videoLink'] ?? "",
 
-      }, { merge: true });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: =======", e);
-    }
-  }
+  //     }, { merge: true });
+  //     console.log("Document written with ID: ", docRef.id);
+  //   } catch (e) {
+  //     console.error("Error adding document: =======", e);
+  //   }
+  // }
 
-  async function sentDetailsToFirebase () {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const storage = getStorage();
-    const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
+  // async function sentDetailsToFirebase () {
+  //   const auth = getAuth();
+  //   const user = auth.currentUser;
+  //   const storage = getStorage();
+  //   const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
 
-     let snapshot =await uploadBytes(storageRef, profileImage);
-     let url = await getDownloadURL(snapshot.ref) ;
-    //  setUserUrl(url);
-     sentUsernsme(user, url);
-    currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
-    return;
-  }
+  //    let snapshot =await uploadBytes(storageRef, profileImage);
+  //    let url = await getDownloadURL(snapshot.ref) ;
+  //   //  setUserUrl(url);
+  //    sentUsernsme(user, url);
+  //   currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
+  //   return;
+  // }
    function nextButtonClicked () {
     currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
     return;
@@ -87,14 +87,14 @@ function Stepper() {
   const steps = ["Bio", "Social", "Session", "Video"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
-  const [formData, setFormData] = useState({});
+  // const [formData, setFormData] = useState({});
 
-  function updateField(field, value) {
-    setFormData({
-      ...formData,
-      [field]: value,
-    })
-  }
+  // function updateField(field, value) {
+  //   setFormData({
+  //     ...formData,
+  //     [field]: value,
+  //   })
+  // }
 
 
   return (
