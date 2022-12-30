@@ -7,6 +7,7 @@ import { faEnvelope, faKey, faEyeSlash, faEye } from '@fortawesome/free-solid-sv
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { collection, setDoc, doc, query, where, getDocs } from "firebase/firestore";
 
 
 function Login() {
@@ -15,7 +16,7 @@ function Login() {
     const [loginError, setLoginError] = useState("");
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
     const [eyeIcon, setEyeIcon] = useState(faEye);
     const [show_input, setshow_input] = useState(false);
 
@@ -23,12 +24,9 @@ function Login() {
     const Loginfunction = () => {
         if (loginEmail ?? '') {
             signInWithEmailAndPassword(auth, loginEmail, loginPassword).then((userCredential) => {
-                const user = userCredential.user;
-                setUser(user);
                 navigate("/");
             }).catch((error) => {
                 const loginError = error.code;
-                console.log('Failed with error code: ', { loginError });
                 // const errorMessage = error.message;
                 if (loginError == 'auth/invalid-email') {
                     setLoginError('Invalid Email!');
@@ -102,3 +100,6 @@ function Login() {
 }
 
 export default Login;
+
+
+// https://firebase.google.com/docs/auth/flutter/email-link-auth#:~:text=You%20can%20use%20Firebase%20Authentication,email%20address%20is%20also%20verified.

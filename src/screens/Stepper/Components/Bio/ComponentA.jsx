@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './componentA.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faSquarePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
@@ -59,6 +59,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const [educationError, setEducationError] = useState('');
   const [expertsInError, setExpertsInError] = useState('');
   const [skillsError, setSkillsError] = useState('');
+
   const [loading, setLoading] = useState(false);
 
 
@@ -360,6 +361,8 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
           />
         </div>
       </div>
+
+
       <div className="maxwidth" >
         <span className="iconbuttton" onClick={onBackIconClicked}>
           <FontAwesomeIcon className={currentStep === 1 ? "icon6" : "icon5"} id="backarrow" icon={faArrowLeft} />
