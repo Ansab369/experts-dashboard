@@ -355,7 +355,7 @@ function Profile() {
       <div className="preview-web">
         <div className="preview-1">
           <div className="preview-2">
-            <p className="preview-p1">tottolearning.com/experts/{datas.linkName}<FontAwesomeIcon className="copyIcon" icon={faCopy} /></p>
+            <p className="preview-p1">tottolearning.com/experts/{datas.linkName}<FontAwesomeIcon className="copyIcon" icon={faCopy} onClick={() =>  navigator.clipboard.writeText(`tottolearning.com/experts/${datas.linkName}`)} /></p>
             <div className="copy-preview">
               <Link to={`/experts/${datas.linkName}`}><button className="btn">
                 Preview
