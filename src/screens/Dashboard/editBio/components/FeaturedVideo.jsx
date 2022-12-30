@@ -6,7 +6,7 @@ import EditBioNavBar from '../EditBioNavBar'
 import DashBoardNavBoard from '../../DashBoardNavBar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo ,faTrash} from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
@@ -24,24 +24,21 @@ function FeaturedVideo() {
         const uid = user.uid;
         console.log(uid);
         fetchUserData(uid);
-      } else {
-
-      }
+      } else { }
     });
   }, []);
   function sentModifiedDetailsToFirebase() {
     const auth = getAuth();
     const user = auth.currentUser;
-    // sentUsernsme(user);
     sentDataToFireBase();
     return;
   }
   async function sentDataToFireBase() {
     const auth = getAuth();
     const user = auth.currentUser;
-    
+
     const docRef = doc(db, 'users', user.uid);
-      
+
     setDoc(docRef, {
       videoDatas: videodata,
     }, { merge: true });
@@ -52,10 +49,12 @@ function FeaturedVideo() {
     const docSnap = await getDoc(docRef);
     const fetchdata = docSnap.data();
     if (docSnap.exists()) {
-      console.log(fetchdata)
-      setVideoData(fetchdata.videoDatas);
-      console.log(fetchdata.videoDatas)
-
+      if (fetchdata.videoDatas !== undefined) {
+        setVideoData(fetchdata.videoDatas);
+      } else {
+        addComponent()
+        console.log('fetch data .session data is null')
+      }
     } else {
       console.log("No such document!");
     }
@@ -76,39 +75,28 @@ function FeaturedVideo() {
       }]
     )
   }
- 
+
   return (
     <div className="featuredVideo">
       <DashBoardNavBoard />
       <EditBioNavBar />
       {/*//! <Video/> */}
-
       <div className="ComponentA">
-      <div className="infotext">
-        <FontAwesomeIcon className="icon7" icon={faCircleInfo} />
-        <p>Add details your featured session With Totto Learning</p>
-      </div>
-      <div className="Container" >
-        {/* //! */}
-
-
-      
-        {videodata.map((e, i) => (
+        <div className="infotext">
+          <FontAwesomeIcon className="icon7" icon={faCircleInfo} />
+          <p>Add details your featured session With Totto Learning</p>
+        </div>
+        <div className="Container" >
+          {/* //! */}
+          {videodata.map((e, i) => (
             <Form key={i} videodata={e} onUpdateField={(field, value) => { videodata[i][field] = value; setVideoData([...videodata]) }} onDelete={() => deleteRow(i)} />
-
           ))}
-
-<div className="socialbutton">
+          <div className="socialbutton">
             <button className="button2" onClick={addComponent}>Add More</button>
           </div>
-
-
-
-
-
-        {/* //!  add more button */}
+          {/* //!  add more button */}
+        </div>
       </div>
-    </div>
       {/* //! */}
       <div className="dashbord-save-btn">
         <button className="btn btn-width" onClick={sentModifiedDetailsToFirebase} >Save</button>
@@ -116,33 +104,34 @@ function FeaturedVideo() {
     </div>
   );
 }
-function Form({videodata,    onUpdateField,  onDelete,}){
+
+function Form({ videodata, onUpdateField, onDelete, }) {
   return <div className="social-container">
-  <div>
-{/* //! videoTitle */}
-    <div className="textfieldtitle top-Padding">
-    <FontAwesomeIcon className="icon49" icon={faTrash}  onClick={onDelete}/>
-      <p>Title</p>
-    </div>
-    <div className="textfieldSocial2">
-      <input type="text" id="lname" name="lname" placeholder="Featured Session Title" value={videodata.title}  onChange={(e) => onUpdateField('title', e.target.value)}></input>
-    </div>
-    {/* //!  about */}
-    <div className="textfieldtitle">
-      <p>About</p>
-    </div>
-    <div className="textfieldSocial2">
-      <textarea rows="3" cols="45" name="description" placeholder="" value={videodata.about}  onChange={(e) => onUpdateField('about', e.target.value)} >
-      </textarea>
-    </div>
-    {/* //!  { 4 } */}
-    <div className="textfieldtitle">
-      <p>Link</p>
-    </div>
-    <div className="textfieldSocial2">
-      <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={videodata.link}  onChange={(e) => onUpdateField('link', e.target.value)} ></input>
+    <div>
+      {/* //! videoTitle */}
+      <div className="textfieldtitle top-Padding">
+        <FontAwesomeIcon className="icon49" icon={faTrash} onClick={onDelete} />
+        <p>Title</p>
+      </div>
+      <div className="textfieldSocial2">
+        <input type="text" id="lname" name="lname" placeholder="Featured Session Title" value={videodata.title} onChange={(e) => onUpdateField('title', e.target.value)}></input>
+      </div>
+      {/* //!  about */}
+      <div className="textfieldtitle">
+        <p>About</p>
+      </div>
+      <div className="textfieldSocial2">
+        <textarea rows="3" cols="45" name="description" placeholder="" value={videodata.about} onChange={(e) => onUpdateField('about', e.target.value)} >
+        </textarea>
+      </div>
+      {/* //!  { 4 } */}
+      <div className="textfieldtitle">
+        <p>Link</p>
+      </div>
+      <div className="textfieldSocial2">
+        <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={videodata.link} onChange={(e) => onUpdateField('link', e.target.value)} ></input>
+      </div>
     </div>
   </div>
-</div>
 }
 export default FeaturedVideo;
