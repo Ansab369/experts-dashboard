@@ -8,9 +8,11 @@ import { faCircleInfo, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 function BasicInfo() {
+  const [userImage, setImage] = useState();
   const [firstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const [userlocation, setLocation] = useState();
@@ -45,6 +47,7 @@ function BasicInfo() {
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
     if (docSnap.exists()) {
+      setImage(data.userImageUrl);
       setFirstName(data.firstName);
       setLastName(data.lastName);
       setLocation(data.location);
@@ -59,13 +62,14 @@ function BasicInfo() {
   }
 
   // !  use update methord..
-  let sentUsernsme = async (user) => {
+  let sentUsernsme = async (user,profilePicUrl) => {
     try {
       const docRef = doc(db, 'users', user.uid);
       setDoc(docRef, {
         //! bio
         firstName: firstName ?? '', 
         lastName: LastName ?? '', 
+        userImageUrl: profilePicUrl,
         location: userlocation ?? '',
         organization: userOrganization ?? '',
         about: userAbout ?? '',
@@ -79,14 +83,19 @@ function BasicInfo() {
     }
   }
 
-  function sentModifiedDetailsToFirebase() {
+  async function sentModifiedDetailsToFirebase() {
     const auth = getAuth();
     const user = auth.currentUser;
-    sentUsernsme(user);
+    const storage = getStorage();
+    const storageRef = ref(storage, `userProfile/${user.uid}/${userImage.name}`);
+    let snapshot = await uploadBytes(storageRef, userImage);
+    let url = await getDownloadURL(snapshot.ref);
+    sentUsernsme(user,url);
     return;
   }
 
   const [formData, setFormData] = useState({});
+  const [newSelectedImage, setNewSelectedImage] = useState(null);
   function updateField(field, value) {
     setFormData({
       ...formData,
@@ -97,6 +106,14 @@ function BasicInfo() {
   const selectedTags = tags => {
     console.log(tags);
   };
+  const uploadFile = (e) => {
+    let file = e.target.files[0];
+    console.log('file name 1  : ', file.name);
+    setNewSelectedImage(URL.createObjectURL(file));
+    if (file) {
+      setImage(file);
+    }
+  }
   return (
 
     <div className="basicInfo">
@@ -135,9 +152,12 @@ function BasicInfo() {
           <div className="textfieldinfo">
             <p>Image</p>
           </div>
-          <div className="container-button1">
-            <button className="button0">Select Image</button>
-          </div>
+          <div className="textfield">
+           {/* <div className="image-Button"> */}
+            <img src={newSelectedImage!==null?newSelectedImage: userImage} alt='user' className="profile-image-edit" />
+            {/* <img src={userImage} alt='user' className="profile-image-edit" /> */}
+            <input type="file" name='Selct image' className="button90 img-select-button" onChange={uploadFile} />
+         </div>
           {/* //! location */}
           <div className="addlocation">
             <p>Location</p>
