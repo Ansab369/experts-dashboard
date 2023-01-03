@@ -37,6 +37,8 @@ function FeaturedSession() {
     if (docSnap.exists()) {
       if(fetchdata.sessionData!== undefined){
         setData(fetchdata.sessionData);
+      console.log("data ===",fetchdata.sessionData );
+
       }else{
         addComponent()
         console.log('fetch data .session data is null')
@@ -67,9 +69,10 @@ function FeaturedSession() {
         const storageRef = ref(storage, `userProfile/${user.uid}/sessions/${item.image.name}`);  
         let snapshot = await uploadBytes(storageRef, item.image);
         let url = await getDownloadURL(snapshot.ref);
+        console.log('image url is=======',url)
         return {
           ...item,
-          image: url
+          'image': url
         }        
       })
     );
@@ -78,6 +81,7 @@ function FeaturedSession() {
       
     setDoc(docRef, {
       sessionData: parsedData,
+      // console.log(sessionData);
     }, { merge: true });
     return;
   }
@@ -133,9 +137,12 @@ function FeaturedSession() {
 }
 
 function Form({ data, onDelete, onUpdateField, setSessionImage }) {
+  const [newSelectedImage, setNewSelectedImage] = useState(null);
+
   const uploadFile = (e) => {
     let file = e.target.files[0];
     console.log('file name 1  : ', file.name);
+    setNewSelectedImage(URL.createObjectURL(file));
     if (file) {
       onUpdateField('image', file)
     }
@@ -155,6 +162,8 @@ function Form({ data, onDelete, onUpdateField, setSessionImage }) {
         <p>Image</p>
       </div>
       <div className="textfieldSocial2">
+        {newSelectedImage===null && data.image===''?'':
+      <img src={newSelectedImage!==null?newSelectedImage:data.image} alt='user' className="profile-image-edit" />}
         <input type="file" name='Selct image' className="button90" onChange={uploadFile} />
       </div>
       {/* //!  about */}
