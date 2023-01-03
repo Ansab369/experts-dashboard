@@ -126,7 +126,7 @@ function Form({ videodata, onUpdateField, onDelete, }) {
       </div>
       {/* //!  { 4 } */}
       <div className="textfieldtitle">
-        <p>Link</p>
+        <p>Youtube link</p>
       </div>
       <div className="textfieldSocial2">
         <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={videodata.link} onChange={(e) => onUpdateField('link', e.target.value)} ></input>

@@ -87,7 +87,7 @@ const Experts = () => {
       {data.hasOwnProperty('socialMediaFacebook' || 'socialMediaInstagram' || 'socialMediaLinkedIn' || 'socialMediaTwitter' || 'socialMediaYoutube') ?
         data.socialMediaFacebook === "" && data.socialMediaInstagram === "" && data.socialMediaLinkedIn === "" && data.socialMediaTwitter === "" && data.socialMediaYoutube === "" ? '' : <Social data={data} /> : ("")}
       {data.hasOwnProperty('sessionData') ? data.sessionData.length !== 0 ? <Session data={data} /> : '' : ''}
-      {data.videoDatas === [] ? <Videos data={data} /> : ''}
+      { data.hasOwnProperty('videoDatas') ? data.videoDatas.length !== 0 ? <Videos data={data} /> : '' : ''}
       <Connect data={data} />
       <Footer />
     </div>
