@@ -28,6 +28,7 @@ function FeaturedVideo() {
     });
   }, []);
   function sentModifiedDetailsToFirebase() {
+    // validateYouTubeUrl({...videodata})
     const auth = getAuth();
     const user = auth.currentUser;
     sentDataToFireBase();
@@ -89,7 +90,8 @@ function FeaturedVideo() {
         <div className="Container" >
           {/* //! */}
           {videodata.map((e, i) => (
-            <Form key={i} videodata={e} onUpdateField={(field, value) => { videodata[i][field] = value; setVideoData([...videodata]) }} onDelete={() => deleteRow(i)} />
+            <Form 
+            key={i} videodata={e} onUpdateField={(field, value) => { videodata[i][field] = value; setVideoData([...videodata]) }} onDelete={() => deleteRow(i)} />
           ))}
           <div className="socialbutton">
             <button className="button2" onClick={addComponent}>Add More</button>
@@ -105,7 +107,8 @@ function FeaturedVideo() {
   );
 }
 
-function Form({ videodata, onUpdateField, onDelete, }) {
+function Form({ videodata, onUpdateField, onDelete}) {
+
   return <div className="social-container">
     <div>
       {/* //! videoTitle */}
@@ -129,7 +132,14 @@ function Form({ videodata, onUpdateField, onDelete, }) {
         <p>Youtube link</p>
       </div>
       <div className="textfieldSocial2">
-        <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={videodata.link} onChange={(e) => onUpdateField('link', e.target.value)} ></input>
+        {/* <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={videodata.link} onChange={(e) => onUpdateField('link', e.target.value)} ></input> */}
+        <input type="text" 
+                 id="lname" 
+                 name="lname" 
+                 placeholder="Featured Session Link" 
+                 value={videodata.link} 
+                 onChange={(e) => onUpdateField('link', e.target.value)} 
+                 ></input>
       </div>
     </div>
   </div>
