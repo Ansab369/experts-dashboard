@@ -72,68 +72,65 @@ function SocialLinks() {
     }
   }
 
-  const [instaErrorMesage,setInstaErrorMesage] = useState("");
-  const [facebookErrorMesage,setFaceBookErrorMesage] = useState("");
-  const [youtubeErrorMesage,setYoutubeErrorMesage] = useState("");
-  const [twitterErrorMesage,setTwitterErrorMesage] = useState("");
-  const [linkedErrorMesage,setLinkedErrorMesage] = useState("");
+  const [instaErrorMesage, setInstaErrorMesage] = useState('');
+  const [facebookErrorMesage, setFaceBookErrorMesage] = useState('');
+  const [youtubeErrorMesage, setYoutubeErrorMesage] = useState('');
+  const [twitterErrorMesage, setTwitterErrorMesage] = useState('');
+  const [linkedErrorMesage, setLinkedErrorMesage] = useState('');
 
   function sentSocialModifiedDetailsToFirebase() {
 
-    instagram_url_validation();
-    facebook_url_validation();
-    youtube_url_validation();
-    twitter_url_validation();
-    linkedIn_url_validation();
-
-
-  if(instaErrorMesage===''&& facebookErrorMesage==='' && youtubeErrorMesage==='' && twitterErrorMesage==='' && linkedErrorMesage===''){
-
-    const auth = getAuth();
-    const user = auth.currentUser;
-    // instagram_url(userFacebookLink)===1?sentUsernsme(user):'';
-    sentUsernsme(user);
-    console.log("data sented to server");
-  }
+    var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    if (!userFacebookLink.match(userFacebookLink === '' ? '' : p) || !userInstagramLink.match(userInstagramLink === '' ? '' : p) || !userYoutubeLink.match(userYoutubeLink === '' ? '' : p) || !useTwitterLink.match(useTwitterLink === '' ? '' : p) || !useLinkedInLink.match(useLinkedInLink === '' ? '' : p)) {
+      console.log('==== something not match..  =====');
+      instagram_url_validation();
+      facebook_url_validation();
+      youtube_url_validation();
+      twitter_url_validation();
+      linkedIn_url_validation();
+    } else {
+      setInstaErrorMesage('');
+      setFaceBookErrorMesage('');
+      setYoutubeErrorMesage('');
+      setTwitterErrorMesage('');
+      setLinkedErrorMesage('');
+      const auth = getAuth();
+      const user = auth.currentUser;
+      sentUsernsme(user);
+      console.log("data sented to server");
+    }
     return;
   }
 
-
-  function instagram_url_validation() {
-    if(userInstagramLink===''){setInstaErrorMesage('')}else{
-    var p = /^\s*(http\:\/\/)?instagram\.com\/[a-z\d-_.]{1,255}\s*$/i;
-    if (userInstagramLink.match(p)) {setInstaErrorMesage("")} else {
-      setInstaErrorMesage(" link is not valid ");
-    }}
-  }
-
   function facebook_url_validation() {
-    if(userFacebookLink===""){setFaceBookErrorMesage("")}else{
-    var p = /(?:https?:\/\/)?(?:www\.)?(?:facebook|fb|m\.facebook)\.(?:com|me)\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]+)(?:\/)?/i;
-    if (userFacebookLink.match(p)) {setFaceBookErrorMesage("")} else {
+    var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    if (userFacebookLink.match(userFacebookLink === '' ? '' : p)) { setFaceBookErrorMesage("") } else {
       setFaceBookErrorMesage(" link is not valid ");
-    }}
+    }
+  }
+  function instagram_url_validation() {
+    var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    if (userInstagramLink.match(userInstagramLink === '' ? '' : p)) { setInstaErrorMesage("") } else {
+      setInstaErrorMesage(" link is not valid ");
+    }
   }
   function youtube_url_validation() {
-    if(userYoutubeLink===''){setYoutubeErrorMesage('')}else{
-    var p ='(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-    if (userYoutubeLink.match(p)) {setYoutubeErrorMesage("")} else {
+    var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    if (userYoutubeLink.match(userYoutubeLink === '' ? '' : p)) { setYoutubeErrorMesage("") } else {
       setYoutubeErrorMesage(" link is not valid ");
-    }}
+    }
   }
   function twitter_url_validation() {
-    if(useTwitterLink===""){setTwitterErrorMesage("")}else{
-    var p =/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/;
-    if (useTwitterLink.match(p)) {setTwitterErrorMesage("")} else {
+    var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    if (useTwitterLink.match(useTwitterLink === '' ? '' : p)) { setTwitterErrorMesage("") } else {
       setTwitterErrorMesage(" link is not valid ");
-    }}
+    }
   }
   function linkedIn_url_validation() {
-    if(useLinkedInLink===''){setLinkedErrorMesage('')}else{ 
-    var p ='(https?:\\/\\/(www.)?linkedin.com\\/(mwlite\\/|m\\/)?in\\/[a-zA-Z0-9_.-]+\\/?)';
-    if (useLinkedInLink.match(p)) {setLinkedErrorMesage("")} else {
+    var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    if (useLinkedInLink.match(useLinkedInLink === '' ? '' : p)) { setLinkedErrorMesage("") } else {
       setLinkedErrorMesage(" link is not valid ");
-    }}
+    }
   }
 
 
@@ -159,9 +156,9 @@ function SocialLinks() {
             <div>
               {/* //!  1 */}
               <div className="textfieldtitle">
-              <div className="error-message">
-                <p>FaceBook</p>
-                <div className="error-Text">
+                <div className="error-message">
+                  <p>FaceBook</p>
+                  <div className="error-Text">
                     <p>{facebookErrorMesage}</p>
                   </div>
                 </div>
@@ -190,12 +187,12 @@ function SocialLinks() {
               </div>
               {/* //! 3*/}
               <div className="textfieldtitle">
-              <div className="error-message">
-                <p>Youtube</p>
-                <div className="error-Text">
+                <div className="error-message">
+                  <p>Youtube</p>
+                  <div className="error-Text">
                     <p>{youtubeErrorMesage}</p>
                   </div>
-               </div>
+                </div>
               </div>
               <div className="textfieldSocial2">
                 <textarea rows="1" cols="45" name="description" placeholder="Youtube Link"
@@ -205,12 +202,12 @@ function SocialLinks() {
               </div>
               {/* //! 4 */}
               <div className="textfieldtitle">
-              <div className="error-message">
-                <p>Twitter</p>
-                <div className="error-Text">
+                <div className="error-message">
+                  <p>Twitter</p>
+                  <div className="error-Text">
                     <p>{twitterErrorMesage}</p>
                   </div>
-              </div>
+                </div>
               </div>
               <div className="textfieldSocial2">
                 <textarea rows="1" cols="45" name="description" placeholder="Twitter Profile Link"
@@ -220,12 +217,12 @@ function SocialLinks() {
               </div>
               {/* //! 5 */}
               <div className="textfieldtitle">
-              <div className="error-message">
-                <p>LinkedIn</p>
-                <div className="error-Text">
+                <div className="error-message">
+                  <p>LinkedIn</p>
+                  <div className="error-Text">
                     <p>{linkedErrorMesage}</p>
                   </div>
-              </div>
+                </div>
               </div>
               <div className="textfieldSocial2">
                 <textarea rows="1" cols="45" name="description" placeholder="LinkedIn Profile Link"
