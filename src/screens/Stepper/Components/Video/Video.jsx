@@ -13,7 +13,7 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    addComponent();
+    // addComponent();
   }, []);
 
   function addComponent() {
@@ -126,7 +126,7 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
           ))}
           {/* //!  add more button */}
           <div className="socialbutton">
-            <button className="button2" onClick={addComponent}>Add More</button>
+            <button className="button2" onClick={addComponent}>{videodata.length===0?'Add Video':'Add More'}</button>
           </div>
         </div>
       </div>

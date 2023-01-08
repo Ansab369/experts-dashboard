@@ -40,6 +40,7 @@ const TagsInput = ({ tags, setTags }) => {
 function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const steps = ["Bio", "Social", "Session", "Video"];
 
+
   const [firstName, setFirstName] = useState(null);
   const [LastName, setLastName] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
@@ -67,13 +68,11 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   //! fetch data
   useEffect(() => {
     const user = auth.currentUser;
-    console.log(user)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
         fetchUserData(uid);
       } else {
-        // todo: display fetching data error..(server issue)
       }
     });
   }, []);
@@ -83,17 +82,17 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
     const user = auth.currentUser;
     const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
-    const data = docSnap.data();
+    const datas = docSnap.data();
     if (docSnap.exists()) {
-      // console.log('main data <><><><><>',data);
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setLocation(data.location);
-      setOrganization(data.organization);
-      setAboutUser(data.about);
-      setUserEducation(data.education);
-      setUserExpertIn(data.expertsIn);
-      setUserSkills(data.skills);
+      setProfileImage(datas.userImageUrl);
+      setFirstName(datas.firstName);
+      setLastName(datas.lastName);
+      setLocation(datas.location);
+      setOrganization(datas.organization);
+      setAboutUser(datas.about);
+      setUserEducation(datas.education);
+      setUserExpertIn(datas.expertsIn);
+      setUserSkills(datas.skills);
     } else {
       // console.log("No such document!");
     }
@@ -186,27 +185,32 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   }
 
   async function sentDataToFireBase() {
-    console.log('userExpertIn ===<><><>' ,userExpertIn);
-    // console.log('firstName ===' ,firstName);
-    // console.log('firstName in <><><> ===', firstName);
     Validation();
     if (firstName !== '' && LastName !== '' && profileImage !== null && userlocation !== '' && userOrganization !== '' && userAbout !== '' && userEducation !== '') {
       setLoading(true);
       const auth = getAuth();
       const user = auth.currentUser;
+      if(typeof profileImage!== 'string'){
       const storage = getStorage();
       const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
       let snapshot = await uploadBytes(storageRef, profileImage);
       let url = await getDownloadURL(snapshot.ref);
       sentUsernsme(user, url);
       nextButtonClicked();
+    }else{
+     let url = profileImage;
+     sentUsernsme(user, url);
+      nextButtonClicked();
+    }
     }
     return;
   }
 
+  const [newSelectedImage, setNewSelectedImage] = useState(null);
   const uploadFile = (e) => {
     let file = e.target.files[0];
     console.log('file name 1  : ', file.name);
+    setNewSelectedImage(URL.createObjectURL(file));
     if (file) {
       setProfileImage(file);
     }
@@ -273,9 +277,13 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
               <p>{profileError}</p>
             </div>
           </div>
-          <div className="container-button1">
+          <div className="container-button101">
+          <div className="textfield">
+          {newSelectedImage===null && profileImage===''?'':
+           <img src={newSelectedImage!==null?newSelectedImage:profileImage} alt='thumbnail' className="profile-image-edit" />}
             {/* <button className="button0" onClick={() => fileInput.current.click()}>Select Image</button> */}
-            <input type="file" name='Selct image' className="button90" onChange={uploadFile} />
+            <input type="file" name='Selct image' className="button90 img-select-buttons" onChange={uploadFile} />
+          </div>
           </div>
           {/* //! location */}
           <div className="textfieldinfo1">
