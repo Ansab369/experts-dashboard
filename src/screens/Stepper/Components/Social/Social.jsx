@@ -14,11 +14,12 @@ import HashLoader from "react-spinners/HashLoader";
 function Social({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const steps = ["Bio", "Social", "Session", "Video"];
 
-  const [userFacebookLink, setFacebookLink] = useState('');
-  const [userInstagramLink, setInstagramLink] = useState('');
-  const [userYoutubeLink, setYoutubeLink] = useState('');
-  const [useTwitterLink, setTwitterLink] = useState('');
-  const [useLinkedInLink, setLinkedInLink] = useState('');
+  const [userFacebookLink, setFacebookLink] = useState("");
+  const [userInstagramLink, setInstagramLink] = useState("");
+  const [userYoutubeLink, setYoutubeLink] = useState("");
+  const [useTwitterLink, setTwitterLink] = useState("");
+  const [useLinkedInLink, setLinkedInLink] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   //! fetch data
@@ -43,11 +44,11 @@ function Social({ currentStep, onBackIconClicked, nextButtonClicked }) {
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
     if (docSnap.exists()) {
-      setFacebookLink(data.socialMediaFacebook);
-      setInstagramLink(data.socialMediaInstagram);
-      setYoutubeLink(data.socialMediaYoutube);
-      setTwitterLink(data.socialMediaTwitter);
-      setLinkedInLink(data.socialMediaLinkedIn);
+      setFacebookLink(data.socialMediaFacebook ?? '');
+      setInstagramLink(data.socialMediaInstagram ?? '');
+      setYoutubeLink(data.socialMediaYoutube ?? '');
+      setTwitterLink(data.socialMediaTwitter ?? '');
+      setLinkedInLink(data.socialMediaLinkedIn ?? '');
     } else {
       console.log("No such document!");
     }
@@ -73,16 +74,27 @@ function Social({ currentStep, onBackIconClicked, nextButtonClicked }) {
     }
   }
 
-  const [instaErrorMesage, setInstaErrorMesage] = useState();
-  const [facebookErrorMesage, setFaceBookErrorMesage] = useState();
-  const [youtubeErrorMesage, setYoutubeErrorMesage] = useState();
-  const [twitterErrorMesage, setTwitterErrorMesage] = useState();
-  const [linkedErrorMesage, setLinkedErrorMesage] = useState();
+  const [instaErrorMesage, setInstaErrorMesage] = useState('');
+  const [facebookErrorMesage, setFaceBookErrorMesage] = useState('');
+  const [youtubeErrorMesage, setYoutubeErrorMesage] = useState('');
+  const [twitterErrorMesage, setTwitterErrorMesage] = useState('');
+  const [linkedErrorMesage, setLinkedErrorMesage] = useState('');
 
   function sentDataToFireBase() {
+    console.log("button clicked");
+    console.log("userFacebookLink",userFacebookLink);
+    console.log("userInstagramLink",userInstagramLink);
+    console.log("userYoutubeLink",userYoutubeLink);
+    console.log("useTwitterLink",useTwitterLink);
+    console.log("useLinkedInLink",useLinkedInLink);
+
 
     var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    // var p = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    // var d = /^\s*$/;
+    var q =  '';
     if (!userFacebookLink.match(userFacebookLink === '' ? '' : p) || !userInstagramLink.match(userInstagramLink === '' ? '' : p) || !userYoutubeLink.match(userYoutubeLink === '' ? '' : p) || !useTwitterLink.match(useTwitterLink === '' ? '' : p) || !useLinkedInLink.match(useLinkedInLink === '' ? '' : p)) {
+    // if (!userFacebookLink.match( p) || !userInstagramLink.match( p) || !userYoutubeLink.match( p) || !useTwitterLink.match(p) || !useLinkedInLink.match( p)) {
       console.log('==== something not match..  =====');
       instagram_url_validation();
       facebook_url_validation();

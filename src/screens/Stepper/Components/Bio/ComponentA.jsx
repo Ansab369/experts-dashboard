@@ -39,13 +39,14 @@ const TagsInput = ({ tags, setTags }) => {
 
 function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const steps = ["Bio", "Social", "Session", "Video"];
-  const [firstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
+
+  const [firstName, setFirstName] = useState(null);
+  const [LastName, setLastName] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
-  const [userlocation, setLocation] = useState('');
-  const [userOrganization, setOrganization] = useState('');
-  const [userAbout, setAboutUser] = useState('');
-  const [userEducation, setUserEducation] = useState('');
+  const [userlocation, setLocation] = useState(null);
+  const [userOrganization, setOrganization] = useState(null);
+  const [userAbout, setAboutUser] = useState(null);
+  const [userEducation, setUserEducation] = useState(null);
   const [userExpertIn, setUserExpertIn] = useState([]);
   const [userSkills, setUserSkills] = useState([]);
 
@@ -70,8 +71,6 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        // console.log(uid);
-        // console.log('user data fetched==============' );
         fetchUserData(uid);
       } else {
         // todo: display fetching data error..(server issue)
@@ -86,6 +85,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
     if (docSnap.exists()) {
+      // console.log('main data <><><><><>',data);
       setFirstName(data.firstName);
       setLastName(data.lastName);
       setLocation(data.location);
@@ -123,7 +123,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   function Validation() {
 
-    if (firstName === '') {
+    if (firstName === null || firstName === undefined || firstName === '') {
       setFirstNameError('Enter First Name');
     } else if (firstName.length >= 20) {
       setFirstNameError('maximum 20 charactors');
@@ -132,12 +132,11 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
     }
 
 
-    if (LastName === '') {
+    if (LastName === null || LastName === undefined || LastName === '') {
       setSecondNameError('Enter Last Name');
-    } else if (LastName.length >= 20) {
+    }  else if (LastName.length>= 20) {
       setSecondNameError('maximum 20 charactors');
-    }
-    else {
+    } else {
       setSecondNameError('');
     }
 
@@ -147,37 +146,37 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
       setProfileError('');
     }
 
-    if (userlocation === '') {
+    if (userlocation === null || userlocation === undefined || userlocation === '') {
       setLocationError('Enter your location');
     } else {
       setLocationError('');
     }
 
-    if (userOrganization === '') {
+    if (userOrganization === null || userOrganization === undefined ||  userOrganization === '') {
       setOrganizationError('Enter your Organization');
-    } else {
+    }  else {
       setOrganizationError('');
     }
 
-    if (userAbout === '') {
+    if (userAbout === null || userAbout===undefined|| userAbout==='') {
       setAboutError('Enter about you.');
     } else {
       setAboutError('');
     }
 
-    if (userEducation === '') {
+    if (userEducation === null || userEducation === undefined || userEducation === '') {
       setEducationError('Enter your education details.');
     } else {
       setEducationError('');
     }
 
-    if (userExpertIn.length === 0) {
+    if (userExpertIn === undefined|| userExpertIn.length === 0 ) {
       setExpertsInError('Enter your proffesion Tags.');
     } else {
       setExpertsInError('');
     }
 
-    if (userSkills.length === 0) {
+    if ( userSkills === undefined || userSkills.length === 0 ) {
       setSkillsError('Enter your Skills');
     } else {
       setSkillsError('');
@@ -187,6 +186,9 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   }
 
   async function sentDataToFireBase() {
+    console.log('userExpertIn ===<><><>' ,userExpertIn);
+    // console.log('firstName ===' ,firstName);
+    // console.log('firstName in <><><> ===', firstName);
     Validation();
     if (firstName !== '' && LastName !== '' && profileImage !== null && userlocation !== '' && userOrganization !== '' && userAbout !== '' && userEducation !== '') {
       setLoading(true);

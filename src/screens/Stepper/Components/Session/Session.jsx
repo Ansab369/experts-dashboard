@@ -14,10 +14,8 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   addComponent();
-  // }, []);
- //! fetch data
+
+  //! fetch data
   useEffect(() => {
 
     const user = auth.currentUser;
@@ -28,7 +26,6 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
         console.log(uid);
         fetchUserData(uid);
       } else {
-
       }
     });
   }, []);
@@ -38,46 +35,57 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
     const docSnap = await getDoc(docRef);
     const fetchdata = docSnap.data();
     if (docSnap.exists()) {
-      console.log('fetched data=========',fetchdata)
+      console.log('fetched data=========', fetchdata)
       console.log('data fetched ==========')
-      console.log('data session ==========',fetchdata.sessionData)
+      console.log('data session ==========', fetchdata.sessionData)
 
-      if(fetchdata.sessionData===undefined){
-       addComponent();
-
-        // setData(fetchdata.sessionData);
-      }else{
+      if (fetchdata.sessionData === undefined) {
+        // addComponent()
+      } else {
         setData(fetchdata.sessionData);
-
-      //  addComponent();
-
       }
     } else {
       console.log("No such document!");
     }
   }
 
-
+  //! fetured video link validation
+  
   async function sentDataToFireBase() {
+    // checkImageLink();
+    console.log("data sessionData",data);
+    const validationSuccess= validateForm();
+    if(validationSuccess!==true){
+      return false;
+    }
     setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
-    
+
     const parsedData = await Promise.all(
-      data.map(async (item)=>{
+      data.map(async (item) => {
+        console.log('image item ==========',item.image);
+
+        if(typeof item.image!== 'string'){
         const storage = getStorage();
-        const storageRef = ref(storage, `userProfile/${user.uid}/sessions/${item.image.name}`);  
+        const storageRef = ref(storage, `userProfile/${user.uid}/sessions/${item.image.name}`);
         let snapshot = await uploadBytes(storageRef, item.image);
         let url = await getDownloadURL(snapshot.ref);
         return {
           ...item,
           image: url
-        }        
+        }
+      }else{
+        return {
+          ...item,
+          image: item.image
+        }
+      }
       })
-    );
+    );   
 
     const docRef = doc(db, 'users', user.uid);
-      
+
     setDoc(docRef, {
       sessionData: parsedData,
     }, { merge: true });
@@ -87,7 +95,6 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
 
   function addComponent() {
-    console.log(data);
     setData(
       [...data, {
         'title': "",
@@ -104,9 +111,43 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
     setData([...data])
   }
 
+  const [errors, setErrors] = useState([]);
+  function validateForm(){
+    let flag=true;
+    const formErrors =[]
+    data.forEach(row => { 
+      const rowErrors = {};
+      const link= row.link;
+      const about= row.about;
+      const image= row.image;
+      const title= row.title;
+      var p = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+      if(!link.match(p)){
+        rowErrors.link="Link not valid";
+        flag=false;
+      }
+      if(about===''){
+        rowErrors.about="Enter about You";
+        flag=false;
+      }
+      if(title===''){
+        rowErrors.title="Enter title";
+        flag=false;
+      }
+      if(image===''){
+        rowErrors.image="select image";
+        flag=false;
+      }
+      formErrors.push(rowErrors);
+      setErrors(formErrors);
+     } )
+    return flag;
+  }
+
+
   return (
     <div>
-            {
+      {
         loading === true ?
           <div style={{
             display: 'flex',
@@ -128,13 +169,12 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
         </div>
         <div className="Container" >
           {/* //! */}
-
           {data.map((e, i) => (
-            <Form key={i} data={e} onUpdateField={(field, value) => { data[i][field] = value; setData([...data]) }} onDelete={() => deleteRow(i)} />
+            <Form errors={errors[i]??{}} index={data[i]} key={i} data={e} onUpdateField={(field, value) => { data[i][field] = value; setData([...data]) }} onDelete={() => deleteRow(i)} />
           ))}
           {/* //!  add more button */}
           <div className="socialbutton">
-            <button className="button2" onClick={addComponent}>Add More</button>
+            <button className="button2" onClick={addComponent}>{data.length===0? 'Add Session': 'Add More'}</button>
           </div>
         </div>
       </div>
@@ -152,36 +192,58 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
   );
 }
 
-function Form({ data, onDelete, onUpdateField, setSessionImage }) {
+function Form({key, data, onDelete, onUpdateField,validateLink ,linkErrorMesag ,errors}) {
+
+  const [newSelectedImage, setNewSelectedImage] = useState(null);
+
   const uploadFile = (e) => {
     let file = e.target.files[0];
-    console.log('file name 1  : ', file.name);
+    console.log('file <>><><> : ', file);
+    console.log('file name <>><><> : ', file.name);
+    setNewSelectedImage(URL.createObjectURL(file));
     if (file) {
       onUpdateField('image', file)
-      // let data = new FormData();
     }
   }
+
+
   return <div className="social-container">
     <div>
       {/* //!  { 1 } */}
       <div className="textfieldtitle top-Padding">
         <FontAwesomeIcon className="icon49" icon={faTrash} onClick={onDelete} />
+        <div className="error-message">
         <p>Title</p>
+        <div className="error-Text">
+            <p>{errors.title}</p>
+          </div>
+      </div>
       </div>
       <div className="textfieldSocial2">
         <input type="text" id="lname" name="lname" placeholder="Featured Session Title" value={data.title} onChange={(e) => onUpdateField('title', e.target.value)}></input>
       </div>
       {/* //!  { 2 } */}
       <div className="textfieldtitle">
+      <div className="error-message">
         <p>Image</p>
+        <div className="error-Text">
+            <p>{errors.image}</p>
+          </div>
+      </div>
       </div>
       <div className="textfieldSocial2">
+      {newSelectedImage===null && data.image===''?'':
+      <img src={newSelectedImage!==null?newSelectedImage:data.image} alt='thumbnail' className="profile-image-edit" />}
         <input type="file" name='Selct image' className="button90" onChange={uploadFile} />
-        {/* <button className="button5">Select Image</button> */}
       </div>
       {/* //!  about */}
       <div className="textfieldtitle">
+      <div className="error-message">
         <p>About</p>
+        <div className="error-Text">
+            <p>{errors.about}</p>
+          </div>
+      </div>
       </div>
       <div className="textfieldSocial2">
         <textarea rows="3" cols="45" name="description" placeholder="Short Discription About Your Session" value={data.about} onChange={(e) => onUpdateField('about', e.target.value)}>
@@ -189,7 +251,12 @@ function Form({ data, onDelete, onUpdateField, setSessionImage }) {
       </div>
       {/* //!  { 4 } */}
       <div className="textfieldtitle">
-        <p>Link</p>
+        <div className="error-message">
+          <p>Link</p>
+          <div className="error-Text">
+            <p>{errors.link}</p>
+          </div>
+        </div>
       </div>
       <div className="textfieldSocial2">
         <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={data.link} onChange={(e) => onUpdateField('link', e.target.value)}></input>

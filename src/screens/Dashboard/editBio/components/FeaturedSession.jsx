@@ -141,7 +141,7 @@ function Form({ data, onDelete, onUpdateField, setSessionImage }) {
 
   const uploadFile = (e) => {
     let file = e.target.files[0];
-    console.log('file name 1  : ', file.name);
+    // console.log('file name 1  : ', file.name);
     setNewSelectedImage(URL.createObjectURL(file));
     if (file) {
       onUpdateField('image', file)

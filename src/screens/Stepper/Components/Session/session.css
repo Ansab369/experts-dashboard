@@ -91,3 +91,18 @@
     /* border: 4px solid #E6EEFC; */
     border-radius: 10px;
 }
+.error-message{
+    flex-direction: row;
+    display :flex;
+}
+.error-Text p{
+    font-size: 13px;
+    margin-left: 20px;
+    color: red;
+}
+.profile-image-edit {
+    width :100%;
+    height:160px;
+    object-fit: cover;
+    border-radius: 5px 5px 0px 0px;
+}
