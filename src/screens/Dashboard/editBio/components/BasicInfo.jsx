@@ -9,7 +9,7 @@ import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import HashLoader from "react-spinners/HashLoader";
 
 function BasicInfo() {
   const [userImage, setImage] = useState();
@@ -21,6 +21,8 @@ function BasicInfo() {
   const [userEducation, setUserEducation] = useState();
   const [userExpertIn, setUserExpertIn] = useState([]);
   const [userSkills, setUserSkills] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
 
 
@@ -84,13 +86,23 @@ function BasicInfo() {
   }
 
   async function sentModifiedDetailsToFirebase() {
+    setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
+    if(typeof userImage!== 'string'){
     const storage = getStorage();
     const storageRef = ref(storage, `userProfile/${user.uid}/${userImage.name}`);
     let snapshot = await uploadBytes(storageRef, userImage);
     let url = await getDownloadURL(snapshot.ref);
     sentUsernsme(user,url);
+    setLoading(false);
+  }else{
+    let url = userImage;
+    sentUsernsme(user,url);
+    setLoading(false);
+
+  }
+  // setLoading(false);
     return;
   }
 
@@ -115,6 +127,22 @@ function BasicInfo() {
     }
   }
   return (
+    <>
+    {
+      loading === true ?
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          width: "100%",
+        }}>
+          <HashLoader color="#8B77EE" />
+        </div> : ''
+    }
 
     <div className="basicInfo">
       <DashBoardNavBoard />
@@ -229,6 +257,7 @@ function BasicInfo() {
         <button className="btn btn-width" onClick={sentModifiedDetailsToFirebase}>Save</button>
       </div>
     </div>
+    </>
   );
 }
 
@@ -252,7 +281,7 @@ const TagsInput = ({ tags, setTags }) => {
           </li>
         ))}
       </ul>
-      <input type="text" onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
+      <input type="text" onKeyUp={event => event.key === "," ? addTags(event) : null}
         placeholder="Press enter to add tags" />
     </div>
   );

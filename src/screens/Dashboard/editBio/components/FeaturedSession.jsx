@@ -11,10 +11,12 @@ import { db, auth } from "../../../../firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import HashLoader from "react-spinners/HashLoader";
 
 
 function FeaturedSession() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     const user = auth.currentUser;
@@ -65,15 +67,18 @@ function FeaturedSession() {
         if(typeof item.image==='string'){
           return item;
         }
+        setLoading(true);
         const storage = getStorage();
         const storageRef = ref(storage, `userProfile/${user.uid}/sessions/${item.image.name}`);  
         let snapshot = await uploadBytes(storageRef, item.image);
         let url = await getDownloadURL(snapshot.ref);
         console.log('image url is=======',url)
+        setLoading(false);  
         return {
           ...item,
           'image': url
-        }        
+        } 
+            
       })
     );
 
@@ -105,6 +110,22 @@ function FeaturedSession() {
   }
 
   return (
+  <>
+    {
+      loading === true ?
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          width: "100%",
+        }}>
+          <HashLoader color="#8B77EE" />
+        </div> : ''
+    }
     <div className="featuredSession">
       <DashBoardNavBoard />
       <EditBioNavBar />
@@ -132,7 +153,7 @@ function FeaturedSession() {
             <div className="dashbord-save-btn">
         <button className="btn btn-width" onClick={sentModifiedDetailsToFirebase}>Save</button>
       </div>
-    </div>
+    </div></>
   );
 }
 
