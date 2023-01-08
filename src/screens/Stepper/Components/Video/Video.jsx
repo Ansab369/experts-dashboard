@@ -17,8 +17,6 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
   }, []);
 
   function addComponent() {
-    // console.log("added component");
-    // console.log(videodata);
     setVideoData(
       [...videodata, {
         'title': "",
@@ -47,20 +45,51 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
   }
 
   async function sentDataToFireBase() {
+    // console.log("data sessionData",data);
+    const validationSuccess= validateForm();
+    if(validationSuccess!==true){
+      return false;
+    }
+
+
+
+
     setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
-    // const storage = getStorage();
-    // const storageRef = ref(storage, `userProfile/${user.uid}/${profileImage.name}`);
-
-    //  let snapshot =await uploadBytes(storageRef, profileImage);
-    //  let url = await getDownloadURL(snapshot.ref) ;
-    //  setUserUrl(url);
-    //  sentUsernsme(user, url);
     const docRef = doc(db, 'users', user.uid);
     sentUsernsme(user);
     nextButtonClicked();
     return;
+  }
+
+  const [errors, setErrors] = useState([]);
+
+  function validateForm(){
+    let flag=true;
+    const formErrors =[]
+    videodata.forEach(row => { 
+      const rowErrors = {};
+      const link= row.link;
+      const title= row.title;
+      const about= row.about;
+      var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+      if(!link.match(p)){
+        rowErrors.link="Link not valid";
+        flag=false;
+      }
+      if(title===''){
+        rowErrors.title="Enter title";
+        flag=false;
+      }
+      if(about===''){
+        rowErrors.about="Enter about video";
+        flag=false;
+      }
+      formErrors.push(rowErrors);
+      setErrors(formErrors);
+     } )
+    return flag;
   }
 
 
@@ -92,7 +121,7 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
 
           {videodata.map((e, i) => (
-            <Form key={i} videodata={e} onUpdateField={(field, value) => { videodata[i][field] = value; setVideoData([...videodata]) }} onDelete={() => deleteRow(i)} />
+            <Form errors={errors[i]??{}} key={i} videodata={e} onUpdateField={(field, value) => { videodata[i][field] = value; setVideoData([...videodata]) }} onDelete={() => deleteRow(i)} />
 
           ))}
           {/* //!  add more button */}
@@ -117,20 +146,30 @@ function Video({ currentStep, onBackIconClicked, nextButtonClicked }) {
   );
 }
 
-function Form({ videodata, onUpdateField, onDelete, }) {
+function Form({ videodata, onUpdateField, onDelete,errors }) {
   return <div className="social-container">
     <div>
       {/* //! videoTitle */}
       <div className="textfieldtitle top-Padding">
         <FontAwesomeIcon className="icon49" icon={faTrash} onClick={onDelete} />
+        <div className="error-message">
         <p>Title</p>
+        <div className="error-Text">
+            <p>{errors.title}</p>
+          </div>
+      </div>
       </div>
       <div className="textfieldSocial2">
         <input type="text" id="lname" name="lname" placeholder="Featured Session Title" value={videodata.title} onChange={(e) => onUpdateField('title', e.target.value)}></input>
       </div>
       {/* //!  about */}
       <div className="textfieldtitle">
+      <div className="error-message">
         <p>About</p>
+        <div className="error-Text">
+            <p>{errors.about}</p>
+          </div>
+      </div>
       </div>
       <div className="textfieldSocial2">
         <textarea rows="3" cols="45" name="description" placeholder="" value={videodata.about} onChange={(e) => onUpdateField('about', e.target.value)} >
@@ -138,7 +177,12 @@ function Form({ videodata, onUpdateField, onDelete, }) {
       </div>
       {/* //!  { 4 } */}
       <div className="textfieldtitle">
+      <div className="error-message">
         <p>Link</p>
+        <div className="error-Text">
+            <p>{errors.link}</p>
+          </div>
+      </div>
       </div>
       <div className="textfieldSocial2">
         <input type="text" id="lname" name="lname" placeholder="Featured Session Link" value={videodata.link} onChange={(e) => onUpdateField('link', e.target.value)} ></input>

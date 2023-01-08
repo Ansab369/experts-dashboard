@@ -1,0 +1,9 @@
+.error-message{
+    flex-direction: row;
+    display :flex;
+}
+.error-Text p{
+    font-size: 13px;
+    margin-left: 20px;
+    color: red;
+}
