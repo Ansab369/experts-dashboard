@@ -121,11 +121,14 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
   }
 
   function Validation() {
+    let flag=true;
 
     if (firstName === null || firstName === undefined || firstName === '') {
       setFirstNameError('Enter First Name');
+      flag=false;
     } else if (firstName.length >= 20) {
       setFirstNameError('maximum 20 charactors');
+      flag=false;
     } else {
       setFirstNameError('');
     }
@@ -133,60 +136,78 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
     if (LastName === null || LastName === undefined || LastName === '') {
       setSecondNameError('Enter Last Name');
+      flag=false;
     }  else if (LastName.length>= 20) {
       setSecondNameError('maximum 20 charactors');
+      flag=false;
     } else {
       setSecondNameError('');
     }
 
-    if (profileImage === null) {
+    if (profileImage === null || profileImage ===undefined) {
       setProfileError('Upload profile pic');
+      flag=false;
     } else {
       setProfileError('');
     }
 
     if (userlocation === null || userlocation === undefined || userlocation === '') {
       setLocationError('Enter your location');
+      flag=false;
     } else {
       setLocationError('');
     }
 
     if (userOrganization === null || userOrganization === undefined ||  userOrganization === '') {
       setOrganizationError('Enter your Organization');
+      flag=false;
     }  else {
       setOrganizationError('');
     }
 
     if (userAbout === null || userAbout===undefined|| userAbout==='') {
       setAboutError('Enter about you.');
+      flag=false;
     } else {
       setAboutError('');
     }
 
     if (userEducation === null || userEducation === undefined || userEducation === '') {
       setEducationError('Enter your education details.');
+      flag=false;
     } else {
       setEducationError('');
     }
 
     if (userExpertIn === undefined|| userExpertIn.length === 0 ) {
       setExpertsInError('Enter your proffesion Tags.');
+      flag=false;
     } else {
       setExpertsInError('');
     }
 
     if ( userSkills === undefined || userSkills.length === 0 ) {
       setSkillsError('Enter your Skills');
+      flag=false;
     } else {
       setSkillsError('');
     }
 
-
+    return flag;
   }
 
   async function sentDataToFireBase() {
-    Validation();
-    if (firstName !== '' && LastName !== '' && profileImage !== null && userlocation !== '' && userOrganization !== '' && userAbout !== '' && userEducation !== '') {
+
+    console.log(profileImage);
+
+    const validationSuccess= Validation();
+    if(validationSuccess!==true){
+      return false;
+    }
+    // console.log('newSelectedImage~~~~~',newSelectedImage)
+    // Validation();
+    // if (firstName !== '' && LastName !== '' && profileImage !== null && userlocation !== '' && userOrganization !== '' && userAbout !== '' && userEducation !== '') {
+      console.log('no data')
       setLoading(true);
       const auth = getAuth();
       const user = auth.currentUser;
@@ -202,7 +223,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
      sentUsernsme(user, url);
       nextButtonClicked();
     }
-    }
+    // }
     return;
   }
 

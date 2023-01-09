@@ -19,7 +19,6 @@ function Completestepper() {
                {/* //!  { 1 } */}
                <div className="textfieldtitle">
                    <p>Thanks for Creating totto Link,
-                       Please Login after email verification.
                    </p>
                </div>
             </div>

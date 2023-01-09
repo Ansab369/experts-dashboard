@@ -12,7 +12,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import HashLoader from "react-spinners/HashLoader";
 
 function Social({ currentStep, onBackIconClicked, nextButtonClicked }) {
-  const steps = ["Bio", "Social", "Session", "Video"];
+  const steps = ["Bio", "Social"];
 
   const [userFacebookLink, setFacebookLink] = useState("");
   const [userInstagramLink, setInstagramLink] = useState("");
