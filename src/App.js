@@ -15,6 +15,9 @@ import SocialLinks from './screens/Dashboard/editBio/components/SocialLink';
 import FeaturedSession from './screens/Dashboard/editBio/components/FeaturedSession';
 import FeaturedVideo from './screens/Dashboard/editBio/components/FeaturedVideo';
 
+import SignIn from './screens/signIn/SignIn';
+
+
 
 //!  experts
 import Experts from './screens/expertsPublic/Experts'
@@ -35,6 +38,7 @@ function App() {
           <Route path="/signup/stepper" element={<PrivateRoute><Stepper /></PrivateRoute>} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/experts/:slug" element={<Experts />} />
         </Routes>
       </div>
