@@ -6,7 +6,7 @@
 }
 .Container{
     padding-top: 20px;
-    max-width: 445px;
+    /* max-width: 445px; */
     box-shadow: 3px 15px 43px -5px rgba(0, 0, 0, 0.25);
     background: #FDFEFD;
     border-radius: 10px;
@@ -59,10 +59,18 @@
     font-size: 14px;
 }
 .number-2{
+    /* margin: 20px; */
+    /* padding: 10px; */
+    /* padding-right: 10px; */
+    /* padding-left: 10px; */
+    /* margin-left: 10px;
+    margin-right: 10px; */
     font-weight: 500;
     font-size: 16px;
+    text-align: center;
     color: #000000;
     font-family: 'Poppins', sans-serif;
+    /* white-space: nowrap; */
    
 }
 .Login-Container-Text179{
@@ -73,6 +81,19 @@
     flex-direction: column;
     display: flex;
 }
+.input1{
+    width: 80%;
+    margin: 0px;
+    align-items: center;
+}
+.error-text{
+    color: red;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
 
 
 
@@ -81,32 +102,4 @@
 }
 .dropdown-item:active{
     background-color: #8B77EE;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media screen and (max-width: 490px ) {
-    .Container{
-        width: 90%;
-        border-radius: 8px;
-    }
-    .Login-Container-Text17 p{
-        font-size: 14px;
-    }
 }
