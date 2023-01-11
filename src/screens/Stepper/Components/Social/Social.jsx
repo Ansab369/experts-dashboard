@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "react-widgets/styles.css";
 import './social.css';
-// import DropdownList from "react-widgets/DropdownList";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 

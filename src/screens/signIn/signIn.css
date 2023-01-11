@@ -10,7 +10,7 @@
     box-shadow: 3px 15px 43px -5px rgba(0, 0, 0, 0.25);
     background: #FDFEFD;
     border-radius: 10px;
-    flex-direction: column;
+    flex-direction: column; 
 }
 .Login-Container-Text17{
     margin-top: 20px;
@@ -24,6 +24,7 @@
     display: flex;
     font-weight: 500;
     font-size: 16px;
+    line-height: 10px;
     color: #000000;
 }
 .contry-code{
@@ -34,6 +35,71 @@
 .icon345{
     color:#8B77EE;
 }
+
+.toogle-1{
+    background-color: #fff;
+    color: #8B77EE;
+    margin: 0px;
+    border-color: #fff;
+}
+.toogle-1:hover{
+    background-color: #fff;
+    color: #8B77EE;
+    border-color: #fff;
+}
+.toogle-1:active{
+    background-color: #fff;
+    color: #8B77EE;
+    border-color: #fff;
+}
+.number{
+    color:#8B77EE;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+.number-2{
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+   
+}
+.Login-Container-Text179{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+}
+
+
+
+.dropdown-item{
+
+}
+.dropdown-item:active{
+    background-color: #8B77EE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 490px ) {
     .Container{
