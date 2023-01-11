@@ -183,7 +183,7 @@ function Session({ currentStep, onBackIconClicked, nextButtonClicked }) {
           <FontAwesomeIcon className={currentStep === 1 ? "icon6" : "icon5"} id="backarrow" icon={faArrowLeft} />
         </span>
         <button
-          className="btn"
+          className="btn1"
           onClick={sentDataToFireBase}>
           {currentStep === steps.length ? "Finish" : "Next"}
         </button>

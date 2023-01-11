@@ -51,10 +51,10 @@ function SignIn() {
             <div className="totto-logo">
                 <img src={logo} alt='logo' />
             </div>
-            <div className="ComponentA">
-                <div className="Container" >
+            <div className="ComponentA1">
+                <div className="Container1" >
                     {isOtpSend === false ?
-                        <> <div className="Login-Container-Text17">
+                        <> <div className="Login-Container-Text171">
                             <p>Enter Your Mobile Number</p>
                             <p>to signIn</p>
                         </div>

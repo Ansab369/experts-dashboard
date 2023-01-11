@@ -53,9 +53,9 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
 
   //! errors
   const [firstNameError, setFirstNameError] = useState('');
-  const [secondNmeError, setSecondNameError] = useState('');
   const [profileError, setProfileError] = useState('');
   const [locationError, setLocationError] = useState('');
+  const [secondNmeError, setSecondNameError] = useState('');
   const [organizationError, setOrganizationError] = useState('');
   const [aboutError, setAboutError] = useState('');
   const [educationError, setEducationError] = useState('');
@@ -261,36 +261,37 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
       }
 
       <div className="ComponentA">
-        <div className="infotext">
+        <div className="infotext11">
           <FontAwesomeIcon className="icon7" icon={faCircleInfo} />
-          <p>Add your Details</p>
-        </div>
-        <div className="Container" >
+          <p>fill in your details for getting your </p>
+          
+        </div><p className="infotext-876">own personalized Web Page</p>
+        <div className="Container container-padding" >
           {/* //!  name */}
           <div className="textfieldinfo1">
-            <p>First Name</p>
+            <p>Name</p>
             <div className="error-Text">
               <p>{firstNameError}</p>
             </div>
           </div>
           <div className="textfield">
-            <input type="text" id="lname" name="lname" placeholder="First name"
+            <input type="text" id="lname" name="lname" placeholder="Name"
               value={firstName}
               onChange={(e) => { setFirstName(e.target.value) }}
             ></input>
           </div>
-          <div className="textfieldinfo1">
+          {/* <div className="textfieldinfo1">
             <p>Last Name</p>
             <div className="error-Text">
               <p>{secondNmeError}</p>
             </div>
-          </div>
-          <div className="textfield">
+          </div> */}
+          {/* <div className="textfield">
             <input type="text" id="lname" name="lname" placeholder="Last name"
               value={LastName}
               onChange={(e) => { setLastName(e.target.value) }}
             ></input>
-          </div>
+          </div> */}
           {/* //! image select */}
           <div className="textfieldinfo1">
             <p>Image</p>
@@ -300,9 +301,8 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
           </div>
           <div className="container-button101">
           <div className="textfield">
-          {newSelectedImage===null && profileImage===''?'':
+          {newSelectedImage===null && profileImage===undefined?'':
            <img src={newSelectedImage!==null?newSelectedImage:profileImage} alt='thumbnail' className="profile-image-edit" />}
-            {/* <button className="button0" onClick={() => fileInput.current.click()}>Select Image</button> */}
             <input type="file" name='Selct image' className="button90 img-select-buttons" onChange={uploadFile} />
           </div>
           </div>
@@ -312,7 +312,6 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
             <div className="error-Text">
               <p>{locationError}</p>
             </div>
-            {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
           </div>
           <div className="textfield">
             <input type="text" id="lname" name="lname" placeholder="Enter Your Location"
@@ -321,21 +320,20 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
             ></input>
           </div>
           {/* //! working at */}
-          <div className="textfieldinfo1">
+          {/* <div className="textfieldinfo1">
             <p>Working at</p>
             <div className="error-Text">
               <p>{organizationError}</p>
             </div>
-            {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
           </div>
           <div className="textfield">
             <input type="text" id="lname" name="lname" placeholder="Enter Your Organization"
               value={userOrganization}
               onChange={(e) => { setOrganization(e.target.value) }}
             ></input>
-          </div>
+          </div> */}
           {/* //!  about */}
-          <div className="textfieldinfo1">
+          {/* <div className="textfieldinfo1">
             <p>About</p>
             <div className="error-Text">
               <p>{aboutError}</p>
@@ -350,23 +348,22 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
               value={userAbout}
               onChange={(e) => { setAboutUser(e.target.value) }}>
             </textarea>
-          </div>
+          </div> */}
           {/* //! Education */}
-          <div className="textfieldinfo1">
+          {/* <div className="textfieldinfo1">
             <p>Education</p>
             <div className="error-Text">
               <p>{educationError}</p>
             </div>
-            {/* <FontAwesomeIcon className="icon2" icon={faSquarePlus} /> */}
           </div>
           <div className="textfield">
             <input type="text" id="lname" name="lname" placeholder="Your Education Details.."
               value={userEducation}
               onChange={(e) => { setUserEducation(e.target.value) }}
             ></input>
-          </div>
+          </div> */}
           {/* //! Tag Session 1  -- Expert In   */}
-          <div className="textfieldinfo1">
+          {/* <div className="textfieldinfo1">
             <p>Expert In</p>
             <div className="error-Text">
               <p>{expertsInError}</p>
@@ -374,13 +371,10 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
           </div>
           <TagsInput selectedTags={selectedTags}
             tags={userExpertIn ?? []}
-            setTags={tags => setUserExpertIn(tags)}/>
-
-
-
+            setTags={tags => setUserExpertIn(tags)}/> */}
 
           {/* //! Tag Session 2 -- Skills */}
-          <div className="textfieldinfo1">
+          {/* <div className="textfieldinfo1">
             <p>Skills</p>
             <div className="error-Text">
               <p>{skillsError}</p>
@@ -388,8 +382,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
           </div>
           <TagsInput selectedTags={selectedTags}
             tags={userSkills ?? []}
-            setTags={tags => setUserSkills(tags)}
-          />
+            setTags={tags => setUserSkills(tags)}/> */}
         </div>
       </div>
 
@@ -399,7 +392,7 @@ function ComponentA({ currentStep, onBackIconClicked, nextButtonClicked }) {
           <FontAwesomeIcon className={currentStep === 1 ? "icon6" : "icon5"} id="backarrow" icon={faArrowLeft} />
         </span>
         <button
-          className="btn"
+          className="btn1"
           onClick={sentDataToFireBase}>
           {currentStep === steps.length ? "Finish" : "Next"}
         </button>

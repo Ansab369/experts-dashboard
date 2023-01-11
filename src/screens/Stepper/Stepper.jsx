@@ -87,7 +87,7 @@ function Stepper() {
             <span className="iconbuttton" onClick={() => { currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev - 1); }}>
             </span>
             <Link to='/' >
-              <button className="btn">
+              <button className="btn1">
                 Goto DashBoard
               </button></Link>
           </div>

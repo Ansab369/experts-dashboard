@@ -92,7 +92,7 @@
 /* .icon1{
     color: white;
 } */
-.btn{ 
+.btn1{ 
    /* margin-left: 73%; */
     margin-top: 20px;
 
@@ -140,7 +140,7 @@
 }
 
 @media screen and (max-width: 490px ) {
-  .btn{ 
+  .btn1{ 
     margin-right: 20px;
      margin-top: 20px;
      font-size: 15px;

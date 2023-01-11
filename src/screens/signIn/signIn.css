@@ -1,10 +1,10 @@
-.ComponentA{
+.ComponentA1{
     align-items: center;
     flex: 1;
     flex-direction: column;
     display: flex;
 }
-.Container{
+.Container1{
     padding-top: 20px;
     /* max-width: 445px; */
     box-shadow: 3px 15px 43px -5px rgba(0, 0, 0, 0.25);
@@ -12,11 +12,11 @@
     border-radius: 10px;
     flex-direction: column; 
 }
-.Login-Container-Text17{
+.Login-Container-Text171{
     margin-top: 20px;
     margin-bottom: 30px;
 }
-.Login-Container-Text17 p{
+.Login-Container-Text171 p{
     font-family: 'Poppins', sans-serif;
     align-items: center;
     flex: 1;
